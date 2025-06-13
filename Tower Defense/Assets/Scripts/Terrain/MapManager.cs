@@ -78,7 +78,7 @@ namespace Terrain
             return _currentMap.GetPath();
         }
 
-
+        #region DEBUG
         [Button]
         public void DebugGetPath()
         {
@@ -94,5 +94,6 @@ namespace Terrain
                 yield return cellview.Flash();
             }
         }
+        #endregion
     }
 }

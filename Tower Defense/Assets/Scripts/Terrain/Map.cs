@@ -1,7 +1,6 @@
-using System;
 using System.Collections.Generic;
-using NaughtyAttributes;
 using UnityEngine;
+
 namespace Terrain
 {
     public class Map : ScriptableObject
