@@ -12,64 +12,104 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 29de52b0aa4699444a96400197d49577, type: 3}
   m_Name: map
   m_EditorClassIdentifier: 
-  rows:
-  - cells:
-    - cellType: 0
-    - cellType: 0
-    - cellType: 1
-    - cellType: 0
-    - cellType: 0
-  - cells:
-    - cellType: 0
-    - cellType: 2
-    - cellType: 1
-    - cellType: 2
-    - cellType: 0
-  - cells:
-    - cellType: 2
-    - cellType: 2
-    - cellType: 1
-    - cellType: 2
-    - cellType: 2
-  - cells:
-    - cellType: 2
-    - cellType: 2
-    - cellType: 1
-    - cellType: 1
-    - cellType: 2
-  - cells:
-    - cellType: 2
-    - cellType: 2
-    - cellType: 2
-    - cellType: 1
-    - cellType: 2
-  - cells:
-    - cellType: 2
-    - cellType: 1
-    - cellType: 1
-    - cellType: 1
-    - cellType: 2
-  - cells:
-    - cellType: 2
-    - cellType: 1
-    - cellType: 2
-    - cellType: 2
-    - cellType: 2
-  - cells:
-    - cellType: 2
-    - cellType: 1
-    - cellType: 2
-    - cellType: 2
-    - cellType: 2
-  - cells:
-    - cellType: 2
-    - cellType: 1
-    - cellType: 2
-    - cellType: 2
-    - cellType: 0
-  - cells:
-    - cellType: 2
-    - cellType: 3
-    - cellType: 2
-    - cellType: 0
-    - cellType: 0
+  cells:
+  - cellType: 0
+    coordinates: {x: 1, y: 1}
+  - cellType: 0
+    coordinates: {x: 1, y: 2}
+  - cellType: 1
+    coordinates: {x: 1, y: 3}
+  - cellType: 0
+    coordinates: {x: 1, y: 4}
+  - cellType: 0
+    coordinates: {x: 1, y: 5}
+  - cellType: 0
+    coordinates: {x: 2, y: 1}
+  - cellType: 2
+    coordinates: {x: 2, y: 2}
+  - cellType: 1
+    coordinates: {x: 2, y: 3}
+  - cellType: 2
+    coordinates: {x: 2, y: 4}
+  - cellType: 0
+    coordinates: {x: 2, y: 5}
+  - cellType: 2
+    coordinates: {x: 3, y: 1}
+  - cellType: 2
+    coordinates: {x: 3, y: 2}
+  - cellType: 1
+    coordinates: {x: 3, y: 3}
+  - cellType: 2
+    coordinates: {x: 3, y: 4}
+  - cellType: 2
+    coordinates: {x: 3, y: 5}
+  - cellType: 2
+    coordinates: {x: 4, y: 1}
+  - cellType: 2
+    coordinates: {x: 4, y: 2}
+  - cellType: 1
+    coordinates: {x: 4, y: 3}
+  - cellType: 1
+    coordinates: {x: 4, y: 4}
+  - cellType: 1
+    coordinates: {x: 4, y: 5}
+  - cellType: 2
+    coordinates: {x: 5, y: 1}
+  - cellType: 2
+    coordinates: {x: 5, y: 2}
+  - cellType: 2
+    coordinates: {x: 5, y: 3}
+  - cellType: 2
+    coordinates: {x: 5, y: 4}
+  - cellType: 1
+    coordinates: {x: 5, y: 5}
+  - cellType: 2
+    coordinates: {x: 6, y: 1}
+  - cellType: 1
+    coordinates: {x: 6, y: 2}
+  - cellType: 1
+    coordinates: {x: 6, y: 3}
+  - cellType: 1
+    coordinates: {x: 6, y: 4}
+  - cellType: 1
+    coordinates: {x: 6, y: 5}
+  - cellType: 2
+    coordinates: {x: 7, y: 1}
+  - cellType: 1
+    coordinates: {x: 7, y: 2}
+  - cellType: 2
+    coordinates: {x: 7, y: 3}
+  - cellType: 2
+    coordinates: {x: 7, y: 4}
+  - cellType: 2
+    coordinates: {x: 7, y: 5}
+  - cellType: 2
+    coordinates: {x: 8, y: 1}
+  - cellType: 1
+    coordinates: {x: 8, y: 2}
+  - cellType: 2
+    coordinates: {x: 8, y: 3}
+  - cellType: 2
+    coordinates: {x: 8, y: 4}
+  - cellType: 2
+    coordinates: {x: 8, y: 5}
+  - cellType: 2
+    coordinates: {x: 9, y: 1}
+  - cellType: 1
+    coordinates: {x: 9, y: 2}
+  - cellType: 2
+    coordinates: {x: 9, y: 3}
+  - cellType: 2
+    coordinates: {x: 9, y: 4}
+  - cellType: 0
+    coordinates: {x: 9, y: 5}
+  - cellType: 2
+    coordinates: {x: 10, y: 1}
+  - cellType: 1
+    coordinates: {x: 10, y: 2}
+  - cellType: 2
+    coordinates: {x: 10, y: 3}
+  - cellType: 0
+    coordinates: {x: 10, y: 4}
+  - cellType: 0
+    coordinates: {x: 10, y: 5}

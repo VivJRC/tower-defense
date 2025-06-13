@@ -14,7 +14,7 @@ namespace Terrain
         [SerializeField] private Vector2 _size;
         [SerializeField] private string _mapName;
         [SerializeField] private Map _map;
-
+ 
         [Button]
         private void CreateCells()
         {
@@ -25,7 +25,7 @@ namespace Terrain
                 for (int y = 0; y < _size.y; ++y)
                 {
                     CellEditor cell = Instantiate(_cellPrefab, _cellParent);
-                    cell.transform.position = new Vector3(x * 50 + 50, y * 50 + 50, 0);
+                    cell.transform.position = new Vector3(x * 50, y * 50, 0);
                     cell.gameObject.name = "(" + x + "," + y + ")";
                     cell.x = x;
                     cell.y = y;
@@ -55,13 +55,17 @@ namespace Terrain
                 }
             }
 
-            map.SetSize(maxX + 1, maxY + 1);
-
             // Set each cell's type using its individual coordinates
+            List<Cell> cells = new();
             foreach (CellEditor cellEditor in currentCells)
             {
-                map.SetCellType(cellEditor.x + 1, cellEditor.y + 1, cellEditor.cellType);
+                cells.Add(new Cell()
+                {
+                    cellType = cellEditor.cellType,
+                    coordinates = new Vector2(cellEditor.x + 1, cellEditor.y + 1),
+                });
             }
+            map.cells = cells.ToArray();
 
             string path = "Assets/Data/Map";
             string assetPath = Path.Combine(path, (string.IsNullOrEmpty(_mapName) ? "Map" : _mapName) + ".asset");
@@ -75,19 +79,13 @@ namespace Terrain
         private void ViewMap()
         {
             Clean();
-            Vector2 size = _map.Size;
-
-            for (int x = 0; x < size.x; ++x)
+            foreach (Cell cell in _map.cells)
             {
-                for (int y = 0; y < size.y; ++y)
-                {
-                    CellEditor cell = Instantiate(_cellPrefab, _cellParent);
-                    cell.transform.position = new Vector3(x * 50 + 50, y * 50 + 50, 0);
-                    cell.gameObject.name = "(" + x + "," + y + ")";
+                CellEditor cellEditor = Instantiate(_cellPrefab, _cellParent);
+                cellEditor.transform.position = new Vector3(cell.coordinates.x * 50 + 50, cell.coordinates.y * 50 + 50, 0);
+                cellEditor.gameObject.name = "(" + cell.coordinates.x + "," + cell.coordinates.y + ")";
 
-                    Cell mapCell = _map.GetCell(x + 1, y + 1);
-                    cell.cellType = mapCell?.cellType ?? E_CellType.DEFAULT;
-                }
+                cellEditor.cellType = cell.cellType;
             }
         }
 
