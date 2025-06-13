@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using NaughtyAttributes;
 using UnityEngine;
 
 namespace Terrain
@@ -24,6 +25,7 @@ namespace Terrain
 
         public void DisplayMap(Map map)
         {
+            _currentMap = map;
             int i;
             if (_cellViews != null && _cellViews.Count > 0)
             {
@@ -49,26 +51,48 @@ namespace Terrain
                 }
                 cellView.gameObject.SetActive(true);
                 cellView.transform.localPosition = new Vector3(cell.coordinates.x * 85, cell.coordinates.y * 85, 0);
-                cellView.SetType(cell.cellType);
+                cellView.SetType(cell);
                 i++;
             }
         }
 
-        public Cell GetCellAtCoordinates(int x, int y)
+        public CellView GetCellAtCoordinates(int x, int y)
         {
             return GetCellAtCoordinates(new Vector2(x, y));
         }
 
-        public Cell GetCellAtCoordinates(Vector2 coordinates)
+        public CellView GetCellAtCoordinates(Vector2 coordinates)
         {
-            foreach (Cell cell in _currentMap.cells)
+            foreach (CellView cellview in _cellViews)
             {
-                if (cell.coordinates == coordinates)
+                if (cellview.Cell.coordinates == coordinates)
                 {
-                    return cell;
+                    return cellview;
                 }
             }
             return null;
+        }
+
+        public List<Cell> GetPath()
+        {
+            return _currentMap.GetPath();
+        }
+
+
+        [Button]
+        public void DebugGetPath()
+        {
+            StartCoroutine(DebugCoroutineGetPath());
+        }
+
+        private IEnumerator DebugCoroutineGetPath()
+        {
+            List<Cell> cells = GetPath();
+            for (int i = 0; i < cells.Count; ++i)
+            {
+                CellView cellview = GetCellAtCoordinates(cells[i].coordinates);
+                yield return cellview.Flash();
+            }
         }
     }
 }
