@@ -59,11 +59,10 @@ namespace Terrain
             List<Cell> cells = new();
             foreach (CellEditor cellEditor in currentCells)
             {
-                cells.Add(new Cell()
-                {
-                    cellType = cellEditor.cellType,
-                    coordinates = new Vector2(cellEditor.x + 1, cellEditor.y + 1),
-                });
+                Cell cell = new();
+                cell.cellType = cellEditor.cellType;
+                cell.coordinates = new Vector2(cellEditor.x + 1, cellEditor.y + 1);
+                cells.Add(cell);
             }
             map.cells = cells.ToArray();
 

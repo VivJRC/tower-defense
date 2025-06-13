@@ -8,10 +8,12 @@ public class GameManager : MonoBehaviour
 {
     [SerializeField] private EnemyManager _enemyManager;
     [SerializeField] private Map _map;
+    [SerializeField] private MapView _mapView;
 
     private void Start()
     {
         _enemyManager.Init();
+        _mapView.DisplayMap(_map);
     }
 
     private void Update()
