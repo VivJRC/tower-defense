@@ -25,7 +25,7 @@ MonoBehaviour:
     coordinates: {x: 1, y: 5}
   - cellType: 0
     coordinates: {x: 1, y: 6}
-  - cellType: 1
+  - cellType: 4
     coordinates: {x: 1, y: 7}
   - cellType: 0
     coordinates: {x: 1, y: 8}

@@ -401,8 +401,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _enemyManager: {fileID: 88293452}
-  _map: {fileID: 11400000, guid: b4bfcb14efc2d494381533bca505ea4f, type: 2}
-  _mapView: {fileID: 1831281154}
+  _mapView: {fileID: 1831281156}
 --- !u!4 &986240156
 Transform:
   m_ObjectHideFlags: 0
@@ -521,28 +520,14 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1831281155}
-  - component: {fileID: 1831281154}
+  - component: {fileID: 1831281156}
   m_Layer: 0
-  m_Name: MapView
+  m_Name: MapManager
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &1831281154
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1831281153}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c874816a6f77ee548b7eca3db2b552c8, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _cellParent: {fileID: 931087949}
-  _cellPrefab: {fileID: 6179638910280865764, guid: 500c17ee608f4bd439d63c0a752acf5f, type: 3}
 --- !u!4 &1831281155
 Transform:
   m_ObjectHideFlags: 0
@@ -558,6 +543,21 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1831281156
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1831281153}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b39d936138b4ee5439354e8666d33089, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _map: {fileID: 11400000, guid: b4bfcb14efc2d494381533bca505ea4f, type: 2}
+  _cellParent: {fileID: 931087949}
+  _cellPrefab: {fileID: 6179638910280865764, guid: 500c17ee608f4bd439d63c0a752acf5f, type: 3}
 --- !u!1 &2032219630
 GameObject:
   m_ObjectHideFlags: 0

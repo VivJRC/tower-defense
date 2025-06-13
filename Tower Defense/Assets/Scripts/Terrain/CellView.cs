@@ -20,6 +20,7 @@ namespace Terrain
                 E_CellType.SLOT => Color.gray,
                 E_CellType.PATH => Color.green,
                 E_CellType.END => Color.white,
+                E_CellType.START => Color.white,
                 _ => Color.red,
             };
         }

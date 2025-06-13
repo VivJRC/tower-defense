@@ -1,15 +1,26 @@
 using System.Collections;
 using System.Collections.Generic;
-using Terrain;
 using UnityEngine;
 
 namespace Terrain
 {
-    public class MapView : MonoBehaviour
+    public class MapManager : MonoBehaviour
     {
+        [SerializeField] private Map _map;
         [SerializeField] private Transform _cellParent;
         [SerializeField] private CellView _cellPrefab;
         private List<CellView> _cellViews;
+        private Map _currentMap;
+
+        public void Init()
+        {
+            DisplayMap(_map);
+        }
+
+        public void CustomUpdate(float deltaTime)
+        {
+
+        }
 
         public void DisplayMap(Map map)
         {
@@ -39,8 +50,25 @@ namespace Terrain
                 cellView.gameObject.SetActive(true);
                 cellView.transform.localPosition = new Vector3(cell.coordinates.x * 85, cell.coordinates.y * 85, 0);
                 cellView.SetType(cell.cellType);
-                i++; 
+                i++;
             }
+        }
+
+        public Cell GetCellAtCoordinates(int x, int y)
+        {
+            return GetCellAtCoordinates(new Vector2(x, y));
+        }
+
+        public Cell GetCellAtCoordinates(Vector2 coordinates)
+        {
+            foreach (Cell cell in _currentMap.cells)
+            {
+                if (cell.coordinates == coordinates)
+                {
+                    return cell;
+                }
+            }
+            return null;
         }
     }
 }
