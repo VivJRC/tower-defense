@@ -16,100 +16,100 @@ MonoBehaviour:
   - cellType: 0
     coordinates: {x: 1, y: 1}
   - cellType: 0
-    coordinates: {x: 1, y: 2}
+    coordinates: {x: 1, y: 1}
   - cellType: 1
-    coordinates: {x: 1, y: 3}
+    coordinates: {x: 1, y: 1}
   - cellType: 0
-    coordinates: {x: 1, y: 4}
+    coordinates: {x: 1, y: 1}
   - cellType: 0
-    coordinates: {x: 1, y: 5}
+    coordinates: {x: 1, y: 1}
   - cellType: 0
-    coordinates: {x: 2, y: 1}
+    coordinates: {x: 1, y: 1}
   - cellType: 2
-    coordinates: {x: 2, y: 2}
+    coordinates: {x: 1, y: 1}
   - cellType: 1
-    coordinates: {x: 2, y: 3}
+    coordinates: {x: 1, y: 1}
   - cellType: 2
-    coordinates: {x: 2, y: 4}
+    coordinates: {x: 1, y: 1}
   - cellType: 0
-    coordinates: {x: 2, y: 5}
+    coordinates: {x: 1, y: 1}
   - cellType: 2
-    coordinates: {x: 3, y: 1}
+    coordinates: {x: 1, y: 1}
   - cellType: 2
-    coordinates: {x: 3, y: 2}
+    coordinates: {x: 1, y: 1}
   - cellType: 1
-    coordinates: {x: 3, y: 3}
+    coordinates: {x: 1, y: 1}
   - cellType: 2
-    coordinates: {x: 3, y: 4}
+    coordinates: {x: 1, y: 1}
   - cellType: 2
-    coordinates: {x: 3, y: 5}
+    coordinates: {x: 1, y: 1}
   - cellType: 2
-    coordinates: {x: 4, y: 1}
+    coordinates: {x: 1, y: 1}
   - cellType: 2
-    coordinates: {x: 4, y: 2}
+    coordinates: {x: 1, y: 1}
   - cellType: 1
-    coordinates: {x: 4, y: 3}
+    coordinates: {x: 1, y: 1}
   - cellType: 1
-    coordinates: {x: 4, y: 4}
+    coordinates: {x: 1, y: 1}
   - cellType: 1
-    coordinates: {x: 4, y: 5}
+    coordinates: {x: 1, y: 1}
   - cellType: 2
-    coordinates: {x: 5, y: 1}
+    coordinates: {x: 1, y: 1}
   - cellType: 2
-    coordinates: {x: 5, y: 2}
+    coordinates: {x: 1, y: 1}
   - cellType: 2
-    coordinates: {x: 5, y: 3}
+    coordinates: {x: 1, y: 1}
   - cellType: 2
-    coordinates: {x: 5, y: 4}
+    coordinates: {x: 1, y: 1}
   - cellType: 1
-    coordinates: {x: 5, y: 5}
+    coordinates: {x: 1, y: 1}
   - cellType: 2
-    coordinates: {x: 6, y: 1}
+    coordinates: {x: 1, y: 1}
   - cellType: 1
-    coordinates: {x: 6, y: 2}
+    coordinates: {x: 1, y: 1}
   - cellType: 1
-    coordinates: {x: 6, y: 3}
+    coordinates: {x: 1, y: 1}
   - cellType: 1
-    coordinates: {x: 6, y: 4}
+    coordinates: {x: 1, y: 1}
   - cellType: 1
-    coordinates: {x: 6, y: 5}
+    coordinates: {x: 1, y: 1}
   - cellType: 2
-    coordinates: {x: 7, y: 1}
+    coordinates: {x: 1, y: 1}
   - cellType: 1
-    coordinates: {x: 7, y: 2}
+    coordinates: {x: 1, y: 1}
   - cellType: 2
-    coordinates: {x: 7, y: 3}
+    coordinates: {x: 1, y: 1}
   - cellType: 2
-    coordinates: {x: 7, y: 4}
+    coordinates: {x: 1, y: 1}
   - cellType: 2
-    coordinates: {x: 7, y: 5}
+    coordinates: {x: 1, y: 1}
   - cellType: 2
-    coordinates: {x: 8, y: 1}
+    coordinates: {x: 1, y: 1}
   - cellType: 1
-    coordinates: {x: 8, y: 2}
+    coordinates: {x: 1, y: 1}
   - cellType: 2
-    coordinates: {x: 8, y: 3}
+    coordinates: {x: 1, y: 1}
   - cellType: 2
-    coordinates: {x: 8, y: 4}
+    coordinates: {x: 1, y: 1}
   - cellType: 2
-    coordinates: {x: 8, y: 5}
+    coordinates: {x: 1, y: 1}
   - cellType: 2
-    coordinates: {x: 9, y: 1}
+    coordinates: {x: 1, y: 1}
   - cellType: 1
-    coordinates: {x: 9, y: 2}
+    coordinates: {x: 1, y: 1}
   - cellType: 2
-    coordinates: {x: 9, y: 3}
+    coordinates: {x: 1, y: 1}
   - cellType: 2
-    coordinates: {x: 9, y: 4}
+    coordinates: {x: 1, y: 1}
   - cellType: 0
-    coordinates: {x: 9, y: 5}
+    coordinates: {x: 1, y: 1}
   - cellType: 2
-    coordinates: {x: 10, y: 1}
-  - cellType: 1
-    coordinates: {x: 10, y: 2}
+    coordinates: {x: 1, y: 1}
+  - cellType: 3
+    coordinates: {x: 1, y: 1}
   - cellType: 2
-    coordinates: {x: 10, y: 3}
+    coordinates: {x: 1, y: 1}
   - cellType: 0
-    coordinates: {x: 10, y: 4}
+    coordinates: {x: 1, y: 1}
   - cellType: 0
-    coordinates: {x: 10, y: 5}
+    coordinates: {x: 1, y: 1}
