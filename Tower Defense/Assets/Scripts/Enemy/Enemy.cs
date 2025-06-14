@@ -19,7 +19,6 @@ namespace Enemies
         private CellView _currentCell;
         private List<CellView> _path;
 
-        private float _delay;
         private float _speed;
         public bool reachedEnd;
         private Vector2 _target;
@@ -31,8 +30,9 @@ namespace Enemies
             _currentHealth = _model.MaxHealth;
             _view.gameObject.SetActive(true);
             _view.InitHealth(_model.MaxHealth);
-            _currentPos = start.Cell.Coordinates * 85;
-            _view.UpdatePos(_currentPos);
+
+            _currentPos = start.Cell.Coordinates;
+            _view.UpdatePos(_currentPos * 85);
             _currentCell = start;
 
             _path = new List<CellView>();
@@ -41,19 +41,12 @@ namespace Enemies
                 _path.Add(path[i]); // copy path
             }
             reachedEnd = false;
-            _speed = 50f;
+            _speed = 2f;
         }
 
         public void Move(float deltaTime)
         {
-            _delay += deltaTime;
-            if (_delay > 0.1f)
-            {
-                _delay = 0f;
-                _currentCell.StartFlash();
-            }
-
-            if ((_currentCell.Cell.Coordinates - _currentPos).sqrMagnitude < 0.1f)
+            if ((_currentCell.Cell.Coordinates - _currentPos).sqrMagnitude < 0.01f)
             {
                 _path.Remove(_currentCell);
                 if (_currentCell.Cell.CellType != E_CellType.END)
@@ -65,13 +58,12 @@ namespace Enemies
                     reachedEnd = true;
                 }
             }
-            else 
+            else
             {
-                
                 _target = (_currentCell.Cell.Coordinates - _currentPos).normalized;
             }
             _currentPos += _speed * deltaTime * _target;
-            _view.UpdatePos(_currentPos* 85);
+            _view.UpdatePos(_currentPos * 85);
         }
 
         public void AddDamage(float damage)
