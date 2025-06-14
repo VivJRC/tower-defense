@@ -4,16 +4,24 @@ namespace Enemies
 {
     public class Enemy
     {
+        public E_EnemyType Type => _model.Type;
         private EnemyModel _model;
+        private EnemyView _view;
+        public EnemyView View => _view;
 
-        private int _maxHealth => _model.MaxHealth;
-        private int _currentHealth;
+
+        private float _currentHealth;
+        public float CurrentHealth => _currentHealth;
 
         private Vector3 _currentPos;
 
-        public void Init(EnemyModel model)
+        public Enemy(EnemyModel model, EnemyView view)
         {
-            _currentHealth = _maxHealth;
+            _model = model;
+            _view = view;
+            _currentHealth = _model.MaxHealth;
+            _view.gameObject.SetActive(true);
+            _view.InitHealth(_model.MaxHealth);
         }
 
         public void Move(float deltaTime)
@@ -21,9 +29,15 @@ namespace Enemies
 
         }
 
-        public void Die()
+        public void AddDamage(float damage)
         {
+            _currentHealth -= damage;
+            _view.UpdateHealth(_currentHealth);
+        }
 
+        public void Kill()
+        {
+            _view.gameObject.SetActive(false);
         }
     }
 }

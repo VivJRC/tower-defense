@@ -5,8 +5,8 @@ namespace Enemies
     [CreateAssetMenu()]
     public class EnemyModel : ScriptableObject
     {
-        [SerializeField] private int _health;
-        public int MaxHealth => _health;
+        [SerializeField] private float _health;
+        public float MaxHealth => _health;
 
         [SerializeField] private E_EnemyType _type;
         public E_EnemyType Type => _type;
