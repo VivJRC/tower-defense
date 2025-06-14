@@ -5,18 +5,20 @@ using Terrain;
 using Enemies;
 using UnityEngine.UI;
 using TMPro;
+using Defenses;
 
 public class GameManager : MonoBehaviour
 {
     [SerializeField] private EnemyManager _enemyManager;
     [SerializeField] private MapManager _mapView;
     [SerializeField] private WaveManager _waveManager;
+    [SerializeField] private DefenseManager _defenseManager;
     [SerializeField] private Button _speedBtn;
     [SerializeField] private TextMeshProUGUI _speedBtnText;
     [SerializeField] private int _startHealth;
     private int _currentHealth;
     [SerializeField] private TextMeshProUGUI _health;
-    [SerializeField] private bool _gameOver;
+    private bool _gameOver;
 
     private float _speed;
 
@@ -28,6 +30,7 @@ public class GameManager : MonoBehaviour
         List<Cell> path = _mapView.GetPath();
         _enemyManager.Init(start, path);
         _waveManager.Init();
+        _defenseManager.Init();
         _speed = 1f;
         _speedBtnText.text = ">>";
         _speedBtn.onClick.AddListener(OnSpeedBtnClicked);
@@ -77,5 +80,6 @@ public class GameManager : MonoBehaviour
                 _gameOver = true;
             }
         }
+        _defenseManager.CustomUpdate(deltaTime);
     }
 }

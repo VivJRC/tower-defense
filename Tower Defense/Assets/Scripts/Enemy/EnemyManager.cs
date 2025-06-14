@@ -9,14 +9,14 @@ namespace Enemies
     public class EnemyManager : MonoBehaviour
     {
         [SerializeField] private Transform _viewParent;
-        [SerializeField] private EnemyDatas[] _datas;
+        [SerializeField] private EnemyData[] _datas;
 
         private List<Enemy> _enemies;
         private Dictionary<E_EnemyType, List<EnemyView>> _availableViews;
         private Cell _start;
         private List<Cell> _path;
 
-        public int reachedEndThisFrame;
+        [HideInInspector] public int reachedEndThisFrame;
 
         public void Init(Cell start, List<Cell> path)
         {
@@ -26,7 +26,7 @@ namespace Enemies
             reachedEndThisFrame = 0;
 
             _availableViews = new Dictionary<E_EnemyType, List<EnemyView>>();
-            foreach (EnemyDatas datas in _datas)
+            foreach (EnemyData datas in _datas)
             {
                 List<EnemyView> viewList = new();
                 for (int i = 0; i < 10; ++i)
@@ -35,7 +35,7 @@ namespace Enemies
                     view.gameObject.SetActive(false);
                     viewList.Add(view);
                 }
-                _availableViews.Add(datas.type, viewList);
+                _availableViews.Add(datas.model.Type, viewList);
             }
         }
 
@@ -56,7 +56,7 @@ namespace Enemies
         {
             EnemyModel model = GetModel(type);
             if (model == null)
-                Debug.LogError("Couldn't find an EnemyModel of type: " + type);
+                Debug.LogError("Couldn't find an EnemyModel of type: " + type + " in EnemyManager.");
 
             EnemyView view;
             if (_availableViews[type].Count > 0)
@@ -68,7 +68,7 @@ namespace Enemies
             {
                 EnemyView viewPrefab = GetView(type);
                 if (viewPrefab == null)
-                    Debug.LogError("Couldn't find an EnemyView of type: " + type);
+                    Debug.LogError("Couldn't find an EnemyView of type: " + type + " in EnemyManager.");
 
                 view = Instantiate(viewPrefab, _viewParent);
             }
@@ -108,11 +108,11 @@ namespace Enemies
             return GetData(type).view;
         }
 
-        private EnemyDatas GetData(E_EnemyType type)
+        private EnemyData GetData(E_EnemyType type)
         {
-            foreach (EnemyDatas data in _datas)
+            foreach (EnemyData data in _datas)
             {
-                if (data.type == type)
+                if (data.model.Type == type)
                 {
                     return data;
                 }
@@ -121,9 +121,8 @@ namespace Enemies
         }
 
         [Serializable]
-        private class EnemyDatas
+        private class EnemyData
         {
-            public E_EnemyType type;
             public EnemyModel model;
             public EnemyView view;
         }
