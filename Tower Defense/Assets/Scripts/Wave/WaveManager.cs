@@ -39,7 +39,7 @@ public class WaveManager : MonoBehaviour
         _spawnTimer += deltaTime;
 
         float remainingTime = _currentWave.Delay - _waveTimer;
-        if (remainingTime <= 4f && remainingTime>0)
+        if (remainingTime <= 4f && remainingTime>0 && !_lastWave)
         {
             _warning.text = "Next wave in " + (int)remainingTime;
         }
