@@ -13,10 +13,10 @@ namespace Enemies
 
         private List<Enemy> _enemies;
         private Dictionary<E_EnemyType, List<EnemyView>> _availableViews;
-        private CellView _start;
-        private List<CellView> _path;
+        private Cell _start;
+        private List<Cell> _path;
 
-        public void Init(CellView start, List<CellView> path)
+        public void Init(Cell start, List<Cell> path)
         {
             _start = start;
             _path = path;

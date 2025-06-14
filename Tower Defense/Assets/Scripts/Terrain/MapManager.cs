@@ -74,20 +74,14 @@ namespace Terrain
             return null;
         }
 
-        public List<CellView> GetPath()
+        public List<Cell> GetPath()
         {
-            List<Cell> cells = _currentMap.GetPath();
-            List<CellView> path = new();
-            for (int i = 0; i < cells.Count; ++i)
-            {
-                path.Add(GetCellAtCoordinates(cells[i].Coordinates));
-            }
-            return path;
+            return _currentMap.GetPath();
         }
 
-        public CellView GetStart()
+        public Cell GetStart()
         {
-            return  GetCellAtCoordinates(_currentMap.GetStart().Coordinates);
+            return  _currentMap.GetStart();
         }
 
         #region DEBUG
@@ -99,10 +93,11 @@ namespace Terrain
 
         private IEnumerator DebugCoroutineGetPath()
         {
-            List<CellView> cells = GetPath();
+            List<Cell> cells = GetPath();
             for (int i = 0; i < cells.Count; ++i)
             {
-                yield return cells[i].Flash();
+                CellView cellView = GetCellAtCoordinates(cells[i].Coordinates);
+                yield return cellView.Flash();
             }
         }
         #endregion

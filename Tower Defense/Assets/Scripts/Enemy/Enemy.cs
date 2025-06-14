@@ -16,14 +16,14 @@ namespace Enemies
         public float CurrentHealth => _currentHealth;
 
         private Vector2 _currentPos;
-        private CellView _currentCell;
-        private List<CellView> _path;
+        private Cell _currentCell;
+        private List<Cell> _path;
 
         private float _speed;
         public bool reachedEnd;
         private Vector2 _target;
 
-        public Enemy(EnemyModel model, EnemyView view, CellView start, List<CellView> path)
+        public Enemy(EnemyModel model, EnemyView view, Cell start, List<Cell> path)
         {
             _model = model;
             _view = view;
@@ -31,11 +31,11 @@ namespace Enemies
             _view.gameObject.SetActive(true);
             _view.InitHealth(_model.MaxHealth);
 
-            _currentPos = start.Cell.Coordinates;
+            _currentPos = start.Coordinates;
             _view.UpdatePos(_currentPos * 85);
             _currentCell = start;
 
-            _path = new List<CellView>();
+            _path = new List<Cell>();
             for (int i = 0; i < path.Count; ++i)
             {
                 _path.Add(path[i]); // copy path
@@ -46,10 +46,10 @@ namespace Enemies
 
         public void Move(float deltaTime)
         {
-            if ((_currentCell.Cell.Coordinates - _currentPos).sqrMagnitude < 0.01f)
+            if ((_currentCell.Coordinates - _currentPos).sqrMagnitude < 0.01f)
             {
                 _path.Remove(_currentCell);
-                if (_currentCell.Cell.CellType != E_CellType.END)
+                if (_currentCell.CellType != E_CellType.END)
                 {
                     _currentCell = _path[0];
                 }
@@ -60,7 +60,7 @@ namespace Enemies
             }
             else
             {
-                _target = (_currentCell.Cell.Coordinates - _currentPos).normalized;
+                _target = (_currentCell.Coordinates - _currentPos).normalized;
             }
             _currentPos += _speed * deltaTime * _target;
             _view.UpdatePos(_currentPos * 85);
