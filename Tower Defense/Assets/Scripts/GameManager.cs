@@ -1,11 +1,12 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using Terrain;
-using Enemies;
 using UnityEngine.UI;
 using TMPro;
-using Defenses;
+
+using MAP;
+using ATK;
+using DEF;
+using WAVE;
 
 public class GameManager : MonoBehaviour
 {

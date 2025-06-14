@@ -2,7 +2,7 @@ using System;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace Defenses
+namespace DEF
 {
     public class DefenseManager : MonoBehaviour
     {

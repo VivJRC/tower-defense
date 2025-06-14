@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace Enemies
+namespace ATK
 {
     [CreateAssetMenu()]
     public class EnemyModel : ScriptableObject

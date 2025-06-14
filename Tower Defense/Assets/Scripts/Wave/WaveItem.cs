@@ -1,12 +1,12 @@
 using System;
-using System.Collections;
-using System.Collections.Generic;
-using Enemies;
-using UnityEngine;
+using ATK;
 
-[Serializable]
-public class WaveItem
+namespace WAVE
 {
-    public E_EnemyType enemyType;
-    public int quantity;
+    [Serializable]
+    public class WaveItem
+    {
+        public E_EnemyType enemyType;
+        public int quantity;
+    }   
 }

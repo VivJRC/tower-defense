@@ -2,9 +2,9 @@ using System;
 using System.Collections.Generic;
 using NaughtyAttributes;
 using UnityEngine;
-using Terrain;
+using MAP;
 
-namespace Enemies
+namespace ATK
 {
     public class EnemyManager : MonoBehaviour
     {

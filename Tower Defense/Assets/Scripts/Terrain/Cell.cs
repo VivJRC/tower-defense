@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace Terrain
+namespace MAP
 {
     [System.Serializable]
     public class Cell

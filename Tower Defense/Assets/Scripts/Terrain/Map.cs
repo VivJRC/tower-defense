@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace Terrain
+namespace MAP
 {
     public class Map : ScriptableObject
     {

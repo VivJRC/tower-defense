@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace Defenses
+namespace DEF
 {
     public class DefenseView : MonoBehaviour
     {

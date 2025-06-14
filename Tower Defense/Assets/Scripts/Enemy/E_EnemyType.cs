@@ -1,4 +1,4 @@
-namespace Enemies
+namespace ATK
 {
     public enum E_EnemyType
     {

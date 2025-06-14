@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using NaughtyAttributes;
 using UnityEngine;
 
-namespace Terrain
+namespace MAP
 {
     public class MapManager : MonoBehaviour
     {

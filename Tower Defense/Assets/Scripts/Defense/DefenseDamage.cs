@@ -1,9 +1,12 @@
 using System;
-using Enemies;
+using ATK;
 
-[Serializable]
-public class DefenseDamage
+namespace DEF
 {
-    public E_EnemyType enemyType;
-    public float damage;
+    [Serializable]
+    public class DefenseDamage
+    {
+        public E_EnemyType enemyType;
+        public float damage;
+    }
 }

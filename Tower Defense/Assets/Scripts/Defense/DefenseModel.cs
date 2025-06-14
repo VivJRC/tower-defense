@@ -1,9 +1,7 @@
-using System.Collections;
-using System.Collections.Generic;
-using Enemies;
+using ATK;
 using UnityEngine;
 
-namespace Defenses
+namespace DEF
 {
     [CreateAssetMenu]
     public class DefenseModel : ScriptableObject

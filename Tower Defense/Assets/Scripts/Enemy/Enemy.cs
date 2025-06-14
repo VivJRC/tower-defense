@@ -1,8 +1,8 @@
 using System.Collections.Generic;
-using Terrain;
+using MAP;
 using UnityEngine;
 
-namespace Enemies
+namespace ATK
 {
     public class Enemy
     {

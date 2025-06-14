@@ -1,11 +1,10 @@
-using System.Collections;
 using System.Collections.Generic;
 using System.IO;
 using NaughtyAttributes;
 using UnityEditor;
 using UnityEngine;
 
-namespace Terrain
+namespace MAP
 {
     public class MapEditor : MonoBehaviour
     {

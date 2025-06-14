@@ -1,5 +1,5 @@
 
-namespace Defenses
+namespace DEF
 {
     public enum E_DefenseType
     {

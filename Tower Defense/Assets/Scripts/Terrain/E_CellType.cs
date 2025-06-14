@@ -1,4 +1,4 @@
-namespace Terrain
+namespace MAP
 {
     public enum E_CellType
     {
