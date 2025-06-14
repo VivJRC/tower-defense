@@ -17,7 +17,7 @@ namespace Terrain
         public void SetType(Cell cell)
         {
             _cell = cell;
-            _cellType = cell.cellType;
+            _cellType = cell.CellType;
             _image.color = _cellType switch
             {
                 E_CellType.DEFAULT => Color.black,

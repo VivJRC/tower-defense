@@ -50,7 +50,7 @@ namespace Terrain
                     cellView = _cellViews[i];
                 }
                 cellView.gameObject.SetActive(true);
-                cellView.transform.localPosition = new Vector3(cell.coordinates.x * 85, cell.coordinates.y * 85, 0);
+                cellView.transform.localPosition = new Vector3(cell.Coordinates.x * 85, cell.Coordinates.y * 85, 0);
                 cellView.SetType(cell);
                 i++;
             }
@@ -65,7 +65,7 @@ namespace Terrain
         {
             foreach (CellView cellview in _cellViews)
             {
-                if (cellview.Cell.coordinates == coordinates)
+                if (cellview.Cell.Coordinates == coordinates)
                 {
                     return cellview;
                 }
@@ -76,6 +76,11 @@ namespace Terrain
         public List<Cell> GetPath()
         {
             return _currentMap.GetPath();
+        }
+
+        public Cell GetStart()
+        {
+            return _currentMap.GetStart();
         }
 
         #region DEBUG
@@ -90,7 +95,7 @@ namespace Terrain
             List<Cell> cells = GetPath();
             for (int i = 0; i < cells.Count; ++i)
             {
-                CellView cellview = GetCellAtCoordinates(cells[i].coordinates);
+                CellView cellview = GetCellAtCoordinates(cells[i].Coordinates);
                 yield return cellview.Flash();
             }
         }

@@ -60,8 +60,8 @@ namespace Terrain
             foreach (CellEditor cellEditor in currentCells)
             {
                 Cell cell = new();
-                cell.cellType = cellEditor.cellType;
-                cell.coordinates = new Vector2(cellEditor.x + 1, cellEditor.y + 1);
+                cell.SetCellType(cellEditor.cellType);
+                cell.SetCoordinates(new Vector2(cellEditor.x + 1, cellEditor.y + 1));
                 cells.Add(cell);
             }
             map.cells = cells.ToArray();
@@ -81,10 +81,10 @@ namespace Terrain
             foreach (Cell cell in _map.cells)
             {
                 CellEditor cellEditor = Instantiate(_cellPrefab, _cellParent);
-                cellEditor.transform.position = new Vector3(cell.coordinates.x * 50 + 50, cell.coordinates.y * 50 + 50, 0);
-                cellEditor.gameObject.name = "(" + cell.coordinates.x + "," + cell.coordinates.y + ")";
+                cellEditor.transform.position = new Vector3(cell.Coordinates.x * 50 + 50, cell.Coordinates.y * 50 + 50, 0);
+                cellEditor.gameObject.name = "(" + cell.Coordinates.x + "," + cell.Coordinates.y + ")";
 
-                cellEditor.cellType = cell.cellType;
+                cellEditor.cellType = cell.CellType;
             }
         }
 

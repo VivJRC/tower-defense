@@ -19,7 +19,12 @@ namespace Enemies
 
         public void UpdateHealth(float currentHealth)
         {
-            _currentHealth.fillAmount = currentHealth/_maxHealth;
+            _currentHealth.fillAmount = currentHealth / _maxHealth;
+        }
+
+        public void InitPos(Vector2 pos)
+        {
+            _rectTransform.localPosition = pos;
         }
     }
 }

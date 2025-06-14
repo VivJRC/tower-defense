@@ -2,18 +2,24 @@ using System;
 using System.Collections.Generic;
 using NaughtyAttributes;
 using UnityEngine;
+using Terrain;
 
 namespace Enemies
 {
     public class EnemyManager : MonoBehaviour
     {
-        private List<Enemy> _enemies;
-        private Dictionary<E_EnemyType, List<EnemyView>> _availableViews;
         [SerializeField] private Transform _viewParent;
         [SerializeField] private EnemyDatas[] _datas;
 
-        public void Init()
+        private List<Enemy> _enemies;
+        private Dictionary<E_EnemyType, List<EnemyView>> _availableViews;
+        private Cell _start;
+        private List<Cell> _path;
+
+        public void Init(Cell start, List<Cell> path)
         {
+            _start = start;
+            _path = path;
             _enemies = new List<Enemy>();
 
             _availableViews = new Dictionary<E_EnemyType, List<EnemyView>>();
@@ -59,7 +65,7 @@ namespace Enemies
                 view = Instantiate(viewPrefab, _viewParent);
             }
 
-            Enemy enemy = new(model, view);
+            Enemy enemy = new(model, view, _start, _path);
             _enemies.Add(enemy);
         }
 

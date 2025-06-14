@@ -13,7 +13,7 @@ namespace Terrain
 
             foreach (Cell cell in cells)
             {
-                if (cell.cellType == E_CellType.START)
+                if (cell.CellType == E_CellType.START)
                 {
                     path.Add(cell);
                     break;
@@ -31,20 +31,20 @@ namespace Terrain
 
             while (!reachedEnd && debug > 0)
             {
-                int x = (int)currentCell.coordinates.x;
-                int y = (int)currentCell.coordinates.y;
+                int x = (int)currentCell.Coordinates.x;
+                int y = (int)currentCell.Coordinates.y;
                 foreach (Cell cell in cells)
                 {
-                    if (cell.cellType == E_CellType.END)
+                    if (cell.CellType == E_CellType.END)
                     {
                         reachedEnd = true;
                         path.Add(cell);
                         break;
                     }
 
-                    if ( cell.cellType == E_CellType.PATH &&
-                        ((cell.coordinates.x == x && (cell.coordinates.y == y + 1 || cell.coordinates.y == y - 1)) ||
-                        (cell.coordinates.y == y && (cell.coordinates.x == x + 1 || cell.coordinates.x == x - 1))) &&
+                    if (cell.CellType == E_CellType.PATH &&
+                        ((cell.Coordinates.x == x && (cell.Coordinates.y == y + 1 || cell.Coordinates.y == y - 1)) ||
+                        (cell.Coordinates.y == y && (cell.Coordinates.x == x + 1 || cell.Coordinates.x == x - 1))) &&
                         !path.Contains(cell))
                     {
                         currentCell = cell;
@@ -61,6 +61,19 @@ namespace Terrain
             }
 
             return path;
+        }
+
+        public Cell GetStart()
+        {
+            foreach (Cell cell in cells)
+            {
+                if (cell.CellType == E_CellType.START)
+                {
+                    return cell;
+                }
+            }
+            Debug.LogError("Couldn't find the start of the map: " + name);
+            return null;
         }
     }
 }
