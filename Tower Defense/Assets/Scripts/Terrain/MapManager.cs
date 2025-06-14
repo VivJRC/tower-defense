@@ -18,11 +18,6 @@ namespace Terrain
             DisplayMap(_map);
         }
 
-        public void CustomUpdate(float deltaTime)
-        {
-
-        }
-
         public void DisplayMap(Map map)
         {
             _currentMap = map;

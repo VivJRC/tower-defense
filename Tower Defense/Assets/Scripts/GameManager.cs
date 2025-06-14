@@ -8,6 +8,7 @@ public class GameManager : MonoBehaviour
 {
     [SerializeField] private EnemyManager _enemyManager;
     [SerializeField] private MapManager _mapView;
+    [SerializeField] private WaveManager _waveManager;
 
     private void Start()
     {
@@ -15,12 +16,21 @@ public class GameManager : MonoBehaviour
         Cell start = _mapView.GetStart();
         List<Cell> path = _mapView.GetPath();
         _enemyManager.Init(start, path);
+        _waveManager.Init();
     }
 
     private void Update()
     {
         float deltaTime = Time.deltaTime;
-        _mapView.CustomUpdate(deltaTime);
+        _waveManager.CustomUpdate(deltaTime);
+        if (_waveManager.frameSpawn.Count > 0)
+        {
+            for (int i = _waveManager.frameSpawn.Count - 1; i >= 0; i--)
+            {
+                _enemyManager.AddEnemy(_waveManager.frameSpawn[i]);
+                _waveManager.frameSpawn.RemoveAt(i);
+            }
+        }
         _enemyManager.CustomUpdate(deltaTime);
     }
 }
