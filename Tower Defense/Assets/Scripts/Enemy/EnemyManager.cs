@@ -16,11 +16,14 @@ namespace Enemies
         private Cell _start;
         private List<Cell> _path;
 
+        public int reachedEndThisFrame;
+
         public void Init(Cell start, List<Cell> path)
         {
             _start = start;
             _path = path;
             _enemies = new List<Enemy>();
+            reachedEndThisFrame = 0;
 
             _availableViews = new Dictionary<E_EnemyType, List<EnemyView>>();
             foreach (EnemyDatas datas in _datas)
@@ -41,8 +44,9 @@ namespace Enemies
             for (int i = _enemies.Count-1; i>=0; --i)
             {
                 _enemies[i].Move(deltaTime);
-                if (_enemies[i].reachedEnd)
+                if (_enemies[i].ReachedEnd)
                 {
+                    reachedEndThisFrame++;
                     KillEnemy(_enemies[i]);
                 }
             }

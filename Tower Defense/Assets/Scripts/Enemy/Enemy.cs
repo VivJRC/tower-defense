@@ -20,7 +20,8 @@ namespace Enemies
         private List<Cell> _path;
 
         private float _speed;
-        public bool reachedEnd;
+        private bool _reachedEnd;
+        public bool ReachedEnd => _reachedEnd;
         private Vector2 _target;
 
         public Enemy(EnemyModel model, EnemyView view, Cell start, List<Cell> path)
@@ -40,7 +41,7 @@ namespace Enemies
             {
                 _path.Add(path[i]); // copy path
             }
-            reachedEnd = false;
+            _reachedEnd = false;
             _speed = 2f;
         }
 
@@ -55,7 +56,7 @@ namespace Enemies
                 }
                 else
                 {
-                    reachedEnd = true;
+                    _reachedEnd = true;
                 }
             }
             else

@@ -13,11 +13,16 @@ public class GameManager : MonoBehaviour
     [SerializeField] private WaveManager _waveManager;
     [SerializeField] private Button _speedBtn;
     [SerializeField] private TextMeshProUGUI _speedBtnText;
+    [SerializeField] private int _startHealth;
+    private int _currentHealth;
+    [SerializeField] private TextMeshProUGUI _health;
+    [SerializeField] private bool _gameOver;
 
     private float _speed;
 
     private void Start()
     {
+        _gameOver = false;
         _mapView.Init();
         Cell start = _mapView.GetStart();
         List<Cell> path = _mapView.GetPath();
@@ -26,6 +31,8 @@ public class GameManager : MonoBehaviour
         _speed = 1f;
         _speedBtnText.text = ">>";
         _speedBtn.onClick.AddListener(OnSpeedBtnClicked);
+        _health.text = _startHealth.ToString();
+        _currentHealth = _startHealth;
     }
 
     private void OnDestroy()
@@ -41,6 +48,9 @@ public class GameManager : MonoBehaviour
 
     private void Update()
     {
+        if (_gameOver)
+            return;
+
         float deltaTime = Time.deltaTime * _speed;
         _waveManager.CustomUpdate(deltaTime);
         if (_waveManager.frameSpawn.Count > 0)
@@ -52,5 +62,20 @@ public class GameManager : MonoBehaviour
             }
         }
         _enemyManager.CustomUpdate(deltaTime);
+        if (_enemyManager.reachedEndThisFrame > 0)
+        {
+            for (int i = 0; i < _enemyManager.reachedEndThisFrame; ++i)
+            {
+                _currentHealth--;
+            }
+            _enemyManager.reachedEndThisFrame = 0;
+            _health.text = _currentHealth.ToString();
+
+            if (_currentHealth == 0)
+            {
+                Debug.Log("Game Over!!!");
+                _gameOver = true;
+            }
+        }
     }
 }
