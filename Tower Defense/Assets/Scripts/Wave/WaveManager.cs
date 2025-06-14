@@ -7,6 +7,7 @@ public class WaveManager : MonoBehaviour
 {
     [SerializeField] private Waves _waves;
     [SerializeField] private TextMeshProUGUI _warning;
+    [SerializeField] private TextMeshProUGUI _counter;
 
     private Wave _currentWave;
     private int _currentIndex;
@@ -30,6 +31,7 @@ public class WaveManager : MonoBehaviour
         _currentIndex = 0;
         _spawnTimer = 0f;
         _warning.text = "";
+        _counter.text = "1";
         _currentWave = _waves._Waves[_currentIndex];
     }
 
@@ -39,13 +41,18 @@ public class WaveManager : MonoBehaviour
         _spawnTimer += deltaTime;
 
         float remainingTime = _currentWave.Delay - _waveTimer;
-        if (remainingTime <= 4f && remainingTime>0 && !_lastWave)
+        if (remainingTime <= 4f && remainingTime > 1 && !_lastWave)
         {
             _warning.text = "Next wave in " + (int)remainingTime;
+        }
+        else if (remainingTime<1f && remainingTime>0)
+        {
+            _warning.text = "";
         }
 
         if (_waveTimer >= _currentWave.Delay && !_lastWave)
         {
+            _counter.text = (_currentIndex + 1).ToString();
             foreach (WaveItem waveItem in _currentWave.WaveItems)
             {
                 for (int i = 0; i < waveItem.quantity; ++i)
@@ -56,7 +63,6 @@ public class WaveManager : MonoBehaviour
             _waveTimer = 0f;
             _spawnTimer = _spawnDelay;
             _currentIndex++;
-            _warning.text = "";
             if (_currentIndex < _waves._Waves.Length)
             {
                 _currentWave = _waves._Waves[_currentIndex];
