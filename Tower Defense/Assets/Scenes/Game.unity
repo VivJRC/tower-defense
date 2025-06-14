@@ -183,7 +183,7 @@ GameObject:
   - component: {fileID: 505235940}
   - component: {fileID: 505235939}
   m_Layer: 5
-  m_Name: Text (TMP)
+  m_Name: SpeedBtnText
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -257,10 +257,10 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 24
+  m_fontSize: 27.6
   m_fontSizeBase: 24
   m_fontWeight: 400
-  m_enableAutoSizing: 0
+  m_enableAutoSizing: 1
   m_fontSizeMin: 18
   m_fontSizeMax: 72
   m_fontStyle: 0
@@ -597,6 +597,7 @@ MonoBehaviour:
   _mapView: {fileID: 1831281156}
   _waveManager: {fileID: 769933297}
   _speedBtn: {fileID: 1124353201}
+  _speedBtnText: {fileID: 505235939}
 --- !u!4 &986240156
 Transform:
   m_ObjectHideFlags: 0
@@ -625,7 +626,7 @@ GameObject:
   - component: {fileID: 1124353202}
   - component: {fileID: 1124353201}
   m_Layer: 5
-  m_Name: Button
+  m_Name: SpeedBtn
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

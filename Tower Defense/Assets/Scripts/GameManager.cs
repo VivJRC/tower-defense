@@ -4,6 +4,7 @@ using UnityEngine;
 using Terrain;
 using Enemies;
 using UnityEngine.UI;
+using TMPro;
 
 public class GameManager : MonoBehaviour
 {
@@ -11,6 +12,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] private MapManager _mapView;
     [SerializeField] private WaveManager _waveManager;
     [SerializeField] private Button _speedBtn;
+    [SerializeField] private TextMeshProUGUI _speedBtnText;
 
     private float _speed;
 
@@ -22,6 +24,7 @@ public class GameManager : MonoBehaviour
         _enemyManager.Init(start, path);
         _waveManager.Init();
         _speed = 1f;
+        _speedBtnText.text = ">>";
         _speedBtn.onClick.AddListener(OnSpeedBtnClicked);
     }
 
@@ -33,6 +36,7 @@ public class GameManager : MonoBehaviour
     private void OnSpeedBtnClicked()
     {
         _speed = (_speed == 1f) ? 3f : 1f;
+        _speedBtnText.text = (_speed == 1f) ? ">>" : ">";
     }
 
     private void Update()
