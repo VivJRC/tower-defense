@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using DG.Tweening;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -19,12 +20,13 @@ namespace Enemies
 
         public void UpdateHealth(float currentHealth)
         {
-            _currentHealth.fillAmount = currentHealth / _maxHealth;
+            _currentHealth.DOFillAmount(currentHealth / _maxHealth, 0.1f);
         }
 
-        public void InitPos(Vector2 pos)
+        public void UpdatePos(Vector2 pos)
         {
             _rectTransform.localPosition = pos;
         }
+        
     }
 }

@@ -13,10 +13,10 @@ namespace Enemies
 
         private List<Enemy> _enemies;
         private Dictionary<E_EnemyType, List<EnemyView>> _availableViews;
-        private Cell _start;
-        private List<Cell> _path;
+        private CellView _start;
+        private List<CellView> _path;
 
-        public void Init(Cell start, List<Cell> path)
+        public void Init(CellView start, List<CellView> path)
         {
             _start = start;
             _path = path;
@@ -38,9 +38,13 @@ namespace Enemies
 
         public void CustomUpdate(float deltaTime)
         {
-            for (int i = 0; i < _enemies.Count; ++i)
+            for (int i = _enemies.Count-1; i>=0; --i)
             {
                 _enemies[i].Move(deltaTime);
+                if (_enemies[i].reachedEnd)
+                {
+                    KillEnemy(_enemies[i]);
+                }
             }
         }
 

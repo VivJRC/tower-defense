@@ -12,8 +12,8 @@ public class GameManager : MonoBehaviour
     private void Start()
     {
         _mapView.Init();
-        Cell start = _mapView.GetStart();
-        List<Cell> path = _mapView.GetPath();
+        CellView start = _mapView.GetStart();
+        List<CellView> path = _mapView.GetPath();
         _enemyManager.Init(start, path);
     }
 

@@ -29,6 +29,11 @@ namespace Terrain
             };
         }
 
+        public void StartFlash()
+        {
+            StartCoroutine(Flash());
+        }
+
         public IEnumerator Flash()
         {
             Color color = _image.color;

@@ -51,6 +51,7 @@ namespace Terrain
                 }
                 cellView.gameObject.SetActive(true);
                 cellView.transform.localPosition = new Vector3(cell.Coordinates.x * 85, cell.Coordinates.y * 85, 0);
+                cellView.gameObject.name = "(" + cell.Coordinates.x + "," + cell.Coordinates.y + ")";
                 cellView.SetType(cell);
                 i++;
             }
@@ -73,14 +74,20 @@ namespace Terrain
             return null;
         }
 
-        public List<Cell> GetPath()
+        public List<CellView> GetPath()
         {
-            return _currentMap.GetPath();
+            List<Cell> cells = _currentMap.GetPath();
+            List<CellView> path = new();
+            for (int i = 0; i < cells.Count; ++i)
+            {
+                path.Add(GetCellAtCoordinates(cells[i].Coordinates));
+            }
+            return path;
         }
 
-        public Cell GetStart()
+        public CellView GetStart()
         {
-            return _currentMap.GetStart();
+            return  GetCellAtCoordinates(_currentMap.GetStart().Coordinates);
         }
 
         #region DEBUG
@@ -92,11 +99,10 @@ namespace Terrain
 
         private IEnumerator DebugCoroutineGetPath()
         {
-            List<Cell> cells = GetPath();
+            List<CellView> cells = GetPath();
             for (int i = 0; i < cells.Count; ++i)
             {
-                CellView cellview = GetCellAtCoordinates(cells[i].Coordinates);
-                yield return cellview.Flash();
+                yield return cells[i].Flash();
             }
         }
         #endregion
