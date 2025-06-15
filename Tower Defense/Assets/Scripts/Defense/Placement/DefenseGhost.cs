@@ -1,3 +1,4 @@
+using MAP;
 using UnityEngine;
 
 namespace DEF.Placement
@@ -20,6 +21,7 @@ namespace DEF.Placement
             _cost = defenseModel.Cost;
             _defenseType = defenseModel.Type;
             Instantiate(viewPrefab, _viewParent);
+            _zone.SetParent(_rectTransform.parent);
             _zone.sizeDelta = new Vector2(defenseModel.Zone.x * 85, defenseModel.Zone.y * 85);
             HideGhost();
         }
@@ -37,11 +39,16 @@ namespace DEF.Placement
         public void HideGhost()
         {
             this.gameObject.SetActive(false);
+            _zone.gameObject.SetActive(false);
         }
 
-        public void ShowZone(bool display)
+        public void ShowZone(bool display, CellView cellView = null)
         {
             _zone.gameObject.SetActive(display);
+            if (cellView != null)
+            {
+                _zone.localPosition = cellView.Cell.Coordinates*85;
+            }
         }
     }
 }

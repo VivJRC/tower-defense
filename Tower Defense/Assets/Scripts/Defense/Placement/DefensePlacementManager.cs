@@ -91,7 +91,7 @@ namespace DEF.Placement
 
             _currentGhost.UpdatePos(_ghostPos);
             UpdateTargetCell(true);
-            _currentGhost.ShowZone(IsCellValid(_targetCell));
+            _currentGhost.ShowZone(IsCellValid(_targetCell), _targetCell);
         }
 
         private void UpdateTargetCell(bool highlight)
