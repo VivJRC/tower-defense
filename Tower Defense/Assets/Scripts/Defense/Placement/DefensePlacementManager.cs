@@ -15,6 +15,7 @@ namespace DEF.Placement
         private Dictionary<E_DefenseType, DefenseGhost> _ghosts;
         private bool _drag;
         private DefenseGhost _currentGhost;
+        private Vector2 _ghostPos;
 
         public void Init()
         {
@@ -37,23 +38,43 @@ namespace DEF.Placement
         public void OnBeginDrag(E_DefenseType type, Vector2 pos)
         {
             _drag = true;
+            _ghostPos = pos;
             _currentGhost = _ghosts[type];
-            _currentGhost.ShowGhost();
-            _currentGhost.HideZone();
-            _currentGhost.UpdatePos(pos);
         }
 
         private void OnDrag(Vector2 pos)
         {
-            _currentGhost.UpdatePos(pos);
-            
+            _ghostPos = pos;
         }
 
         private void OnEndDrag(Vector2 pos)
         {
-            _currentGhost.UpdatePos(pos);
-            _currentGhost.HideGhost();
-            _currentGhost = null;
+            _ghostPos = pos;
+            _drag = false;
+        }
+
+        public void CustomUpdate(float deltaTime)
+        {
+            if (!_drag)
+            {
+                if (_currentGhost != null)
+                {
+                    _currentGhost.HideGhost();
+                    _currentGhost = null;
+
+                    // check if must create Defense
+                }
+                return;
+            }
+            // else
+
+            if (!_currentGhost.IsVisible)
+            {
+                _currentGhost.ShowGhost();
+            }
+
+            _currentGhost.UpdatePos(_ghostPos);
+            // check if must show zone
         }
     }
 }

@@ -72,10 +72,10 @@ public class GameManager : MonoBehaviour
 
     private void Update()
     {
-        if (_gameOver)
+        if (_gameOver || _pause)
             return;
 
-        float deltaTime = _pause? 0f : Time.deltaTime * _speed;
+        float deltaTime = Time.deltaTime * _speed;
 
         _waveManager.CustomUpdate(deltaTime);
         if (_waveManager.frameSpawn.Count > 0)
@@ -102,6 +102,8 @@ public class GameManager : MonoBehaviour
                 _gameOver = true;
             }
         }
+        _defensePlacementManager.CustomUpdate(deltaTime);
+
         _defenseManager.CustomUpdate(deltaTime);
     }
 }

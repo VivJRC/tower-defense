@@ -7,6 +7,7 @@ namespace DEF.Placement
         [SerializeField] private RectTransform _rectTransform;
         [SerializeField] private RectTransform _zone;
         [SerializeField] private Transform _viewParent;
+        public bool IsVisible => this.gameObject.activeSelf;
 
         public void Init(DefenseModel defenseModel, DefenseView viewPrefab)
         {
