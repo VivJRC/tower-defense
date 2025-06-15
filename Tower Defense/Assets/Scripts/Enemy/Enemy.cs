@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using MAP;
 using UnityEngine;
@@ -48,7 +49,7 @@ namespace ATK
             _speed = 2f;
         }
 
-        public void Move(float deltaTime)
+        public void CustomUpdate(float deltaTime)
         {
             if ((_currentTarget.Coordinates - _currentPos).sqrMagnitude < 0.01f)
             {
@@ -112,6 +113,11 @@ namespace ATK
         {
             _view.gameObject.SetActive(false);
             _currentCell?.RemoveEnemy(this);
+        }
+
+        public static implicit operator Enemy(Cell v)
+        {
+            throw new NotImplementedException();
         }
     }
 }

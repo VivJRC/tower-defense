@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using ATK;
 using MAP;
 using UnityEngine;
 
@@ -9,12 +10,15 @@ namespace DEF
     {
         [SerializeField] private DefenseConfig _defenseConfig;
         [SerializeField] private Transform _viewParent;
-        
+
         private List<Defense> _defenses;
         private Dictionary<E_DefenseType, List<DefenseView>> _availableViews;
 
+        public List<Defense> defendingThisFrame;
+
         public void Init()
         {
+            defendingThisFrame = new List<Defense>();
             _defenses = new List<Defense>();
 
             _availableViews = new Dictionary<E_DefenseType, List<DefenseView>>();
@@ -35,7 +39,15 @@ namespace DEF
         {
             for (int i = 0; i < _defenses.Count; ++i)
             {
-
+                _defenses[i].CustomUpdate(deltaTime);
+                if (_defenses[i].ReadyToAttack)
+                {
+                    Enemy target = _defenses[i].GetTarget();
+                    if (target != null)
+                    {
+                        defendingThisFrame.Add(_defenses[i]);
+                    }
+                }
             }
         }
 
@@ -63,5 +75,7 @@ namespace DEF
             Defense defense = new(model, view, coordinates, inZone);
             _defenses.Add(defense);
         }
+        
+
     }
 }

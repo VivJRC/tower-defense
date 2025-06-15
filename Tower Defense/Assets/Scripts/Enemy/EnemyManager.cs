@@ -47,7 +47,7 @@ namespace ATK
         {
             for (int i = _enemies.Count-1; i>=0; --i)
             {
-                _enemies[i].Move(deltaTime);
+                _enemies[i].CustomUpdate(deltaTime);
                 if (_enemies[i].ReachedEnd)
                 {
                     reachedEndThisFrame++;

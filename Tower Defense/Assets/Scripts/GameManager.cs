@@ -153,7 +153,7 @@ public class GameManager : MonoBehaviour
         #endregion
 
         #region PLACEMENT MANAGER
-            _defensePlacementManager.CustomUpdate(deltaTime);
+        _defensePlacementManager.CustomUpdate(deltaTime);
         if (_defensePlacementManager.defenseToPlace != null)
         {
             int cost = _defensePlacementManager.defenseToPlace.cost;
@@ -174,7 +174,7 @@ public class GameManager : MonoBehaviour
             }
             else
             {
-                // add feedback not enough tokens
+                // TODO: add feedback not enough tokens
             }
             _defensePlacementManager.defenseToPlace = null;
         }
@@ -182,6 +182,20 @@ public class GameManager : MonoBehaviour
 
         #region DEFENSE MANAGER
         _defenseManager.CustomUpdate(deltaTime);
+        if (_defenseManager.defendingThisFrame.Count > 0)
+        {
+            for (int i = _defenseManager.defendingThisFrame.Count - 1; i >= 0; --i)
+            {
+                Defense defense = _defenseManager.defendingThisFrame[i];
+                Enemy target = defense.GetTarget();
+                float damage = defense.GetDamage();
+
+                defense.Attack();
+                _enemyManager.AddDamage(target, damage);
+                
+                _defenseManager.defendingThisFrame.RemoveAt(i);
+            }
+        }
         #endregion
     }
 }
