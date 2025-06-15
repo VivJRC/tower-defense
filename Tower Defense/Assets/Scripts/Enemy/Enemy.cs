@@ -20,7 +20,6 @@ namespace ATK
         private Cell _previousTarget;
         private Cell _currentTarget;
         private Cell _currentCell;
-        public Cell CurrentCell => _currentCell;
         private List<Cell> _path;
 
         private float _speed;
@@ -77,6 +76,7 @@ namespace ATK
         private void UpdateCurrentCell()
         {
             float minDistance = Mathf.Infinity;
+            Cell newCurrent = null;
 
             float distance;
             for (int i = 0; i < _path.Count; ++i)
@@ -85,13 +85,20 @@ namespace ATK
                 if (distance < minDistance)
                 {
                     minDistance = distance;
-                    _currentCell = _path[i];
+                    newCurrent = _path[i];
                 }
             }
             distance = (_previousTarget.Coordinates - _currentPos).sqrMagnitude;
             if (distance < minDistance)
             {
-                _currentCell = _previousTarget;
+                newCurrent = _previousTarget;
+            }
+
+            if (newCurrent != _currentCell)
+            {
+                _currentCell?.RemoveEnemy(this);
+                newCurrent?.AddEnemy(this);
+                _currentCell = newCurrent;
             }
         }
 
@@ -104,6 +111,7 @@ namespace ATK
         public void Kill()
         {
             _view.gameObject.SetActive(false);
+            _currentCell?.RemoveEnemy(this);
         }
     }
 }
