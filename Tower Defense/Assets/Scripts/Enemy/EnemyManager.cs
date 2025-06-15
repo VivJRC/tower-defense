@@ -16,12 +16,15 @@ namespace ATK
         private Cell _start;
         private List<Cell> _path;
 
+        public List<Enemy> toKillThisFrame;
+
         [HideInInspector] public int reachedEndThisFrame;
 
         public void Init(Cell start, List<Cell> path)
         {
             _start = start;
             _path = path;
+            toKillThisFrame = new List<Enemy>();
             _enemies = new List<Enemy>();
             reachedEndThisFrame = 0;
 
@@ -82,11 +85,11 @@ namespace ATK
             enemy.AddDamage(damage);
             if (enemy.CurrentHealth <= 0)
             {
-                KillEnemy(enemy);
+                toKillThisFrame.Add(enemy);
             }
         }
 
-        private void KillEnemy(Enemy enemy)
+        public void KillEnemy(Enemy enemy)
         {
             if (!_enemies.Contains(enemy))
             {

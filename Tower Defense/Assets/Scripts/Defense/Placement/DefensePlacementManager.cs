@@ -1,7 +1,4 @@
-using System.Collections;
 using System.Collections.Generic;
-using System.Linq;
-using ATK;
 using MAP;
 using UnityEngine;
 
@@ -76,6 +73,7 @@ namespace DEF.Placement
                         defenseToPlace = new DefensePlacement()
                         {
                             defenseType = _currentGhost.DefenseType,
+                            cost = _currentGhost.Cost,
                             coordinates = _targetCell.Cell.Coordinates
                         };
                         _targetCell.AddDefense();
@@ -139,6 +137,7 @@ namespace DEF.Placement
         public class DefensePlacement
         {
             public E_DefenseType defenseType;
+            public int cost;
             public Vector2 coordinates;
         }
     }

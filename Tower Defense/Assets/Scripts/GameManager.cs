@@ -11,18 +11,54 @@ using DEF.Placement;
 
 public class GameManager : MonoBehaviour
 {
+    [Header("Managers")]
     [SerializeField] private EnemyManager _enemyManager;
     [SerializeField] private MapManager _mapView;
     [SerializeField] private WaveManager _waveManager;
     [SerializeField] private DefenseManager _defenseManager;
     [SerializeField] private DefensePlacementManager _defensePlacementManager;
+
+    [Header("Speed")]
     [SerializeField] private Button _speedBtn;
     [SerializeField] private TextMeshProUGUI _speedBtnText;
+
+    [Header("Pause")]
     [SerializeField] private Button _pauseBtn;
     [SerializeField] private TextMeshProUGUI _pauseBtnText;
+
+    [Header("Health")]
     [SerializeField] private int _startHealth;
-    private int _currentHealth;
     [SerializeField] private TextMeshProUGUI _health;
+    private int _currentHealth;
+    private int CurrentHealth
+    {
+        get
+        {
+            return _currentHealth;
+        }
+        set
+        {
+            _currentHealth = value;
+            _health.text = value.ToString();
+        }
+    }
+
+    [Header("Tokens")]
+    [SerializeField] private int _startTokens;
+    [SerializeField] private TextMeshProUGUI _tokens;
+    private int _currentTokens;
+    private int CurrentTokens
+    {
+        get
+        {
+            return _currentTokens;
+        }
+        set
+        {
+            _currentTokens = value;
+            _tokens.text = value.ToString();
+        }
+    }
     private bool _gameOver;
 
     private float _speed;
@@ -48,8 +84,8 @@ public class GameManager : MonoBehaviour
         _pause = false;
         _pauseBtnText.text = "||";
 
-        _health.text = _startHealth.ToString();
-        _currentHealth = _startHealth;
+        CurrentHealth = _startHealth;
+        CurrentTokens = _startTokens;
     }
 
     private void OnDestroy()
@@ -77,6 +113,7 @@ public class GameManager : MonoBehaviour
 
         float deltaTime = Time.deltaTime * _speed;
 
+        #region WAVE MANAGER
         _waveManager.CustomUpdate(deltaTime);
         if (_waveManager.frameSpawn.Count > 0)
         {
@@ -86,33 +123,58 @@ public class GameManager : MonoBehaviour
                 _waveManager.frameSpawn.RemoveAt(i);
             }
         }
+        #endregion
+
+        #region ENEMY MANAGER
         _enemyManager.CustomUpdate(deltaTime);
         if (_enemyManager.reachedEndThisFrame > 0)
         {
             for (int i = 0; i < _enemyManager.reachedEndThisFrame; ++i)
             {
-                _currentHealth--;
+                CurrentHealth--;
             }
             _enemyManager.reachedEndThisFrame = 0;
-            _health.text = _currentHealth.ToString();
 
-            if (_currentHealth == 0)
+            if (CurrentHealth == 0)
             {
                 Debug.Log("Game Over!!!");
                 _gameOver = true;
             }
         }
+        if (_enemyManager.toKillThisFrame.Count > 0)
+        {
+            for (int i = _enemyManager.toKillThisFrame.Count - 1; i >= 0; --i)
+            {
+                _enemyManager.KillEnemy(_enemyManager.toKillThisFrame[i]);
+                CurrentTokens += _enemyManager.toKillThisFrame[i].Drop;
+                _enemyManager.toKillThisFrame.RemoveAt(i);
+            }
+        }
+        #endregion
+
+        #region PLACEMENT MANAGER
         _defensePlacementManager.CustomUpdate(deltaTime);
         if (_defensePlacementManager.defenseToPlace != null)
         {
-            _defenseManager.AddDefense
-            (
-                _defensePlacementManager.defenseToPlace.defenseType,
-                _defensePlacementManager.defenseToPlace.coordinates
-            );
+            if (_defensePlacementManager.defenseToPlace.cost <= CurrentTokens)
+            {
+                CurrentTokens -= _defensePlacementManager.defenseToPlace.cost;
+                _defenseManager.AddDefense
+                (
+                    _defensePlacementManager.defenseToPlace.defenseType,
+                    _defensePlacementManager.defenseToPlace.coordinates
+                );
+            }
+            else
+            {
+                // add feedback not enough tokens
+            }
             _defensePlacementManager.defenseToPlace = null;
         }
+        #endregion
 
+        #region DEFENSE MANAGER
         _defenseManager.CustomUpdate(deltaTime);
+        #endregion
     }
 }

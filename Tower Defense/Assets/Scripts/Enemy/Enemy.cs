@@ -11,6 +11,7 @@ namespace ATK
         private EnemyView _view;
         public EnemyView View => _view;
 
+        public int Drop => _model.Drop;
 
         private float _currentHealth;
         public float CurrentHealth => _currentHealth;

@@ -12,8 +12,12 @@ namespace DEF.Placement
         private E_DefenseType _defenseType;
         public E_DefenseType DefenseType => _defenseType;
 
+        private int _cost;
+        public int Cost => _cost;
+
         public void Init(DefenseModel defenseModel, DefenseView viewPrefab)
         {
+            _cost = defenseModel.Cost;
             _defenseType = defenseModel.Type;
             Instantiate(viewPrefab, _viewParent);
             _zone.sizeDelta = new Vector2(defenseModel.Zone.x * 85, defenseModel.Zone.y * 85);
