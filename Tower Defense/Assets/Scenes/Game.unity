@@ -1300,7 +1300,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _enemyManager: {fileID: 88293452}
-  _mapView: {fileID: 1831281156}
+  _mapManager: {fileID: 1831281156}
   _waveManager: {fileID: 769933297}
   _defenseManager: {fileID: 1438298979}
   _defensePlacementManager: {fileID: 1518544136}

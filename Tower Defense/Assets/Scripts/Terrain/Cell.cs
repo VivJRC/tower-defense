@@ -1,6 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
-using ATK;
 using UnityEngine;
 
 namespace MAP
@@ -9,7 +6,6 @@ namespace MAP
     {
         private bool _hasDefense;
         public bool HasDefense => _hasDefense;
-        private Enemy _enemy;
         private CellModel _model;
 
         public Vector2 Coordinates => _model.Coordinates;

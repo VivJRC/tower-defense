@@ -12,15 +12,16 @@ namespace ATK
         [SerializeField] private EnemyConfig _enemyConfig;
 
         private List<Enemy> _enemies;
+        public List<Enemy> Enemies => _enemies;
         private Dictionary<E_EnemyType, List<EnemyView>> _availableViews;
-        private CellModel _start;
-        private List<CellModel> _path;
+        private Cell _start;
+        private List<Cell> _path;
 
         public List<Enemy> toKillThisFrame;
 
         [HideInInspector] public int reachedEndThisFrame;
 
-        public void Init(CellModel start, List<CellModel> path)
+        public void Init(Cell start, List<Cell> path)
         {
             _start = start;
             _path = path;

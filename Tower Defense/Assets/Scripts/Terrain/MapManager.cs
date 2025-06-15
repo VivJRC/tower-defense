@@ -62,12 +62,12 @@ namespace MAP
             return _cells;
         }
         
-        public CellView GetCellAtCoordinates(int x, int y)
+        public CellView GetCellViewAtCoordinates(int x, int y)
         {
-            return GetCellAtCoordinates(new Vector2(x, y));
+            return GetCellViewAtCoordinates(new Vector2(x, y));
         }
 
-        public CellView GetCellAtCoordinates(Vector2 coordinates)
+        public CellView GetCellViewAtCoordinates(Vector2 coordinates)
         {
             foreach (CellView cellview in _cellViews)
             {
@@ -79,14 +79,37 @@ namespace MAP
             return null;
         }
 
-        public List<CellModel> GetPath()
+        private Cell GetCellAtCoordinates(int x, int y)
         {
-            return _currentMap.GetPath();
+            return GetCellAtCoordinates(new Vector2(x, y));
+        }
+        
+        private Cell GetCellAtCoordinates(Vector2 coordinates)
+        {
+            foreach (Cell cell in _cells)
+            {
+                if (cell.Coordinates == coordinates)
+                {
+                    return cell;
+                }
+            }
+            return null;
         }
 
-        public CellModel GetStart()
+        public List<Cell> GetPath()
         {
-            return  _currentMap.GetStart();
+            List<CellModel> models = _currentMap.GetPath();
+            List<Cell> cells = new();
+            foreach (CellModel cellModel in models)
+            {
+                cells.Add(GetCellAtCoordinates(cellModel.Coordinates));
+            }
+            return cells;
+        }
+
+        public Cell GetStart()
+        {
+            return GetCellAtCoordinates(_currentMap.GetStart().Coordinates); 
         }
 
         #region DEBUG
@@ -98,10 +121,10 @@ namespace MAP
 
         private IEnumerator DebugCoroutineGetPath()
         {
-            List<CellModel> cells = GetPath();
+            List<Cell> cells = GetPath();
             for (int i = 0; i < cells.Count; ++i)
             {
-                CellView cellView = GetCellAtCoordinates(cells[i].Coordinates);
+                CellView cellView = GetCellViewAtCoordinates(cells[i].Coordinates);
                 yield return cellView.Flash();
             }
         }

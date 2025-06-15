@@ -13,7 +13,7 @@ public class GameManager : MonoBehaviour
 {
     [Header("Managers")]
     [SerializeField] private EnemyManager _enemyManager;
-    [SerializeField] private MapManager _mapView;
+    [SerializeField] private MapManager _mapManager;
     [SerializeField] private WaveManager _waveManager;
     [SerializeField] private DefenseManager _defenseManager;
     [SerializeField] private DefensePlacementManager _defensePlacementManager;
@@ -68,13 +68,13 @@ public class GameManager : MonoBehaviour
     {
         _gameOver = false;
 
-        _mapView.Init();
-        CellModel start = _mapView.GetStart();
-        List<CellModel> path = _mapView.GetPath();
+        _mapManager.Init();
+        Cell start = _mapManager.GetStart();
+        List<Cell> path = _mapManager.GetPath();
         _enemyManager.Init(start, path);
         _waveManager.Init();
         _defenseManager.Init();
-        _defensePlacementManager.Init(_mapView.GetMap());
+        _defensePlacementManager.Init(_mapManager.GetMap());
 
         _speed = 1f;
         _speedBtnText.text = ">>";
@@ -153,7 +153,7 @@ public class GameManager : MonoBehaviour
         #endregion
 
         #region PLACEMENT MANAGER
-        _defensePlacementManager.CustomUpdate(deltaTime);
+            _defensePlacementManager.CustomUpdate(deltaTime);
         if (_defensePlacementManager.defenseToPlace != null)
         {
             if (_defensePlacementManager.defenseToPlace.cost <= CurrentTokens)

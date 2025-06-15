@@ -17,15 +17,18 @@ namespace ATK
         public float CurrentHealth => _currentHealth;
 
         private Vector2 _currentPos;
-        private CellModel _currentCell;
-        private List<CellModel> _path;
+        private Cell _previousTarget;
+        private Cell _currentTarget;
+        private Cell _currentCell;
+        public Cell CurrentCell => _currentCell;
+        private List<Cell> _path;
 
         private float _speed;
         private bool _reachedEnd;
         public bool ReachedEnd => _reachedEnd;
         private Vector2 _target;
 
-        public Enemy(EnemyModel model, EnemyView view, CellModel start, List<CellModel> path)
+        public Enemy(EnemyModel model, EnemyView view, Cell start, List<Cell> path)
         {
             _model = model;
             _view = view;
@@ -35,9 +38,9 @@ namespace ATK
 
             _currentPos = start.Coordinates;
             _view.UpdatePos(_currentPos * 85);
-            _currentCell = start;
+            _currentTarget = start;
 
-            _path = new List<CellModel>();
+            _path = new List<Cell>();
             for (int i = 0; i < path.Count; ++i)
             {
                 _path.Add(path[i]); // copy path
@@ -48,12 +51,13 @@ namespace ATK
 
         public void Move(float deltaTime)
         {
-            if ((_currentCell.Coordinates - _currentPos).sqrMagnitude < 0.01f)
+            if ((_currentTarget.Coordinates - _currentPos).sqrMagnitude < 0.01f)
             {
-                _path.Remove(_currentCell);
-                if (_currentCell.CellType != E_CellType.END)
+                _previousTarget = _currentTarget;
+                _path.Remove(_currentTarget);
+                if (_currentTarget.CellType != E_CellType.END)
                 {
-                    _currentCell = _path[0];
+                    _currentTarget = _path[0];
                 }
                 else
                 {
@@ -62,10 +66,33 @@ namespace ATK
             }
             else
             {
-                _target = (_currentCell.Coordinates - _currentPos).normalized;
+                _target = (_currentTarget.Coordinates - _currentPos).normalized;
             }
             _currentPos += _speed * deltaTime * _target;
             _view.UpdatePos(_currentPos * 85);
+
+            UpdateCurrentCell();
+        }
+
+        private void UpdateCurrentCell()
+        {
+            float minDistance = Mathf.Infinity;
+
+            float distance;
+            for (int i = 0; i < _path.Count; ++i)
+            {
+                distance = (_path[i].Coordinates - _currentPos).sqrMagnitude;
+                if (distance < minDistance)
+                {
+                    minDistance = distance;
+                    _currentCell = _path[i];
+                }
+            }
+            distance = (_previousTarget.Coordinates - _currentPos).sqrMagnitude;
+            if (distance < minDistance)
+            {
+                _currentCell = _previousTarget;
+            }
         }
 
         public void AddDamage(float damage)
