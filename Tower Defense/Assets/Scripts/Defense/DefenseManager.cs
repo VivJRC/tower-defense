@@ -6,7 +6,7 @@ namespace DEF
 {
     public class DefenseManager : MonoBehaviour
     {
-        [SerializeField] private DefenseData[] _datas;
+        [SerializeField] private DefenseConfig _defenseConfig;
         [SerializeField] private Transform _viewParent;
         
         private List<Defense> _defenses;
@@ -17,7 +17,7 @@ namespace DEF
             _defenses = new List<Defense>();
 
             _availableViews = new Dictionary<E_DefenseType, List<DefenseView>>();
-            foreach (DefenseData datas in _datas)
+            foreach (DefenseConfig.Data datas in _defenseConfig.Datas)
             {
                 List<DefenseView> viewList = new();
                 for (int i = 0; i < 10; ++i)
@@ -40,7 +40,7 @@ namespace DEF
 
         public void AddDefense(E_DefenseType type)
         {
-            DefenseModel model = GetModel(type);
+            DefenseModel model = _defenseConfig.GetModel(type);
             if (model == null)
                 Debug.LogError("Couldn't find an DefenseModel of type: " + type + " in DefenseManager.");
 
@@ -52,7 +52,7 @@ namespace DEF
             }
             else
             {
-                DefenseView viewPrefab = GetView(type);
+                DefenseView viewPrefab = _defenseConfig.GetView(type);
                 if (viewPrefab == null)
                     Debug.LogError("Couldn't find an DefenseView of type: " + type + " in DefenseManager.");
 
@@ -62,36 +62,5 @@ namespace DEF
             Defense defense = new(model, view);
             _defenses.Add(defense);
         }
-
-        #region HELPERS
-        private DefenseModel GetModel(E_DefenseType type)
-        {
-            return GetData(type).model;
-        }
-
-        private DefenseView GetView(E_DefenseType type)
-        {
-            return GetData(type).view;
-        }
-
-        private DefenseData GetData(E_DefenseType type)
-        {
-            foreach (DefenseData data in _datas)
-            {
-                if (data.model.Type == type)
-                {
-                    return data;
-                }
-            }
-            return null;
-        }
-
-        [Serializable]
-        private class DefenseData
-        {
-            public DefenseModel model;
-            public DefenseView view;
-        }
-        #endregion
     }
 }

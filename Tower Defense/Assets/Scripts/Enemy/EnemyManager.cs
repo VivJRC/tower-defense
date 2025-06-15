@@ -9,7 +9,7 @@ namespace ATK
     public class EnemyManager : MonoBehaviour
     {
         [SerializeField] private Transform _viewParent;
-        [SerializeField] private EnemyData[] _datas;
+        [SerializeField] private EnemyConfig _enemyConfig;
 
         private List<Enemy> _enemies;
         private Dictionary<E_EnemyType, List<EnemyView>> _availableViews;
@@ -26,7 +26,7 @@ namespace ATK
             reachedEndThisFrame = 0;
 
             _availableViews = new Dictionary<E_EnemyType, List<EnemyView>>();
-            foreach (EnemyData datas in _datas)
+            foreach (EnemyConfig.Data datas in _enemyConfig.Datas)
             {
                 List<EnemyView> viewList = new();
                 for (int i = 0; i < 10; ++i)
@@ -54,7 +54,7 @@ namespace ATK
 
         public void AddEnemy(E_EnemyType type)
         {
-            EnemyModel model = GetModel(type);
+            EnemyModel model = _enemyConfig.GetModel(type);
             if (model == null)
                 Debug.LogError("Couldn't find an EnemyModel of type: " + type + " in EnemyManager.");
 
@@ -66,7 +66,7 @@ namespace ATK
             }
             else
             {
-                EnemyView viewPrefab = GetView(type);
+                EnemyView viewPrefab = _enemyConfig.GetView(type);
                 if (viewPrefab == null)
                     Debug.LogError("Couldn't find an EnemyView of type: " + type + " in EnemyManager.");
 
@@ -97,36 +97,6 @@ namespace ATK
             enemy.Kill();
         }
 
-        #region HELPERS
-        private EnemyModel GetModel(E_EnemyType type)
-        {
-            return GetData(type).model;
-        }
-
-        private EnemyView GetView(E_EnemyType type)
-        {
-            return GetData(type).view;
-        }
-
-        private EnemyData GetData(E_EnemyType type)
-        {
-            foreach (EnemyData data in _datas)
-            {
-                if (data.model.Type == type)
-                {
-                    return data;
-                }
-            }
-            return null;
-        }
-
-        [Serializable]
-        private class EnemyData
-        {
-            public EnemyModel model;
-            public EnemyView view;
-        }
-        #endregion
 
         #region DEBUG
         [Button]

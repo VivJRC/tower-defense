@@ -7,6 +7,7 @@ using MAP;
 using ATK;
 using DEF;
 using WAVE;
+using DEF.Placement;
 
 public class GameManager : MonoBehaviour
 {
@@ -14,6 +15,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] private MapManager _mapView;
     [SerializeField] private WaveManager _waveManager;
     [SerializeField] private DefenseManager _defenseManager;
+    [SerializeField] private DefensePlacementManager _defensePlacementManager;
     [SerializeField] private Button _speedBtn;
     [SerializeField] private TextMeshProUGUI _speedBtnText;
     [SerializeField] private int _startHealth;
@@ -26,15 +28,19 @@ public class GameManager : MonoBehaviour
     private void Start()
     {
         _gameOver = false;
+
         _mapView.Init();
         Cell start = _mapView.GetStart();
         List<Cell> path = _mapView.GetPath();
         _enemyManager.Init(start, path);
         _waveManager.Init();
         _defenseManager.Init();
+        _defensePlacementManager.Init();
+
         _speed = 1f;
         _speedBtnText.text = ">>";
         _speedBtn.onClick.AddListener(OnSpeedBtnClicked);
+
         _health.text = _startHealth.ToString();
         _currentHealth = _startHealth;
     }
