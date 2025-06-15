@@ -18,7 +18,7 @@ namespace MAP
         {
             DisplayMap(_map);
         }
-
+        
         public void DisplayMap(Map map)
         {
             _currentMap = map;

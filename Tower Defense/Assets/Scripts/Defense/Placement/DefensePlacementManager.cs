@@ -40,6 +40,12 @@ namespace DEF.Placement
             }
         }
 
+        public void Reset()
+        {
+            _currentGhost?.HideGhost();
+            _drag = false;
+        }
+
         public void OnBeginDrag(E_DefenseType type, Vector2 pos)
         {
             _drag = true;

@@ -16,6 +16,7 @@ namespace WAVE
         private float _waveTimer;
 
         private List<E_EnemyType> _spawnQueue;
+        public int SpawnQueueCount => _spawnQueue.Count;
         [HideInInspector] public List<E_EnemyType> frameSpawn;
         private float _spawnTimer;
 
@@ -26,15 +27,21 @@ namespace WAVE
 
         public void Init()
         {
-            _waveTimer = 0f;
             _spawnQueue = new List<E_EnemyType>();
             frameSpawn = new List<E_EnemyType>();
+        }
+
+        public void Reset()
+        {
+            _waveTimer = 0f;
             _lastWave = false;
             _currentIndex = 0;
             _spawnTimer = 0f;
             _warning.text = "";
             _counter.text = "1";
             _currentWave = _waves._Waves[_currentIndex];
+            _spawnQueue.Clear();
+            frameSpawn.Clear();
         }
 
         public void CustomUpdate(float deltaTime)

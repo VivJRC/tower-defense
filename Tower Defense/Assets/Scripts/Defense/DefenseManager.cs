@@ -35,6 +35,17 @@ namespace DEF
             }
         }
 
+        public void Reset()
+        {
+            for (int i = _defenses.Count - 1; i >= 0; --i)
+            {
+                _availableViews[_defenses[i].DefenseType].Add(_defenses[i].View);
+                _defenses[i].Kill();
+                _defenses.Remove(_defenses[i]);
+            }
+            defendingThisFrame.Clear();
+        }
+
         public void CustomUpdate(float deltaTime)
         {
             for (int i = 0; i < _defenses.Count; ++i)
@@ -51,7 +62,7 @@ namespace DEF
             }
         }
 
-        public void AddDefense(E_DefenseType type, Vector2 coordinates, List<Cell> inZone)
+        public void AddDefense(E_DefenseType type, Cell cell, List<Cell> inZone)
         {
             DefenseModel model = _defenseConfig.GetModel(type);
             if (model == null)
@@ -72,7 +83,7 @@ namespace DEF
                 view = Instantiate(viewPrefab, _viewParent);
             }
 
-            Defense defense = new(model, view, coordinates, inZone);
+            Defense defense = new(model, view, cell, inZone);
             _defenses.Add(defense);
         }
         

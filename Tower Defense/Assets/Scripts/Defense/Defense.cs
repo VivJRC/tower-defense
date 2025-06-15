@@ -10,17 +10,21 @@ namespace DEF
     {
         private DefenseModel _model;
         private DefenseView _view;
+        public DefenseView View => _view;
         private List<Cell> _inZone;
         private float _attackDelay;
         private bool _readyToAttack;
+        private Cell _cell;
         public bool ReadyToAttack => _readyToAttack;
+        public E_DefenseType DefenseType => _model.Type;
 
-        public Defense(DefenseModel model, DefenseView view, Vector2 coordinates, List<Cell> inZone)
+        public Defense(DefenseModel model, DefenseView view, Cell cell, List<Cell> inZone)
         {
+            _cell = cell;
             _model = model;
             _view = view;
             _view.gameObject.SetActive(true);
-            _view.SetPosition(coordinates * 85);
+            _view.SetPosition(_cell.Coordinates * 85);
             _inZone = inZone;
             _readyToAttack = false;
         }
@@ -58,6 +62,12 @@ namespace DEF
         {
             Enemy target = GetTarget();
             return (target != null) ? _model.GetDamageForEnemy(target) : 0f;
+        }
+
+        public void Kill()
+        {
+            _cell.RemoveDefense();
+            _view.gameObject.SetActive(false);
         }
     }
 }

@@ -27,7 +27,6 @@ namespace ATK
             _path = path;
             toKillThisFrame = new List<Enemy>();
             _enemies = new List<Enemy>();
-            reachedEndThisFrame = 0;
 
             _availableViews = new Dictionary<E_EnemyType, List<EnemyView>>();
             foreach (EnemyConfig.Data datas in _enemyConfig.Datas)
@@ -43,9 +42,19 @@ namespace ATK
             }
         }
 
+        public void Reset()
+        {
+            for (int i = _enemies.Count - 1; i >= 0; --i)
+            {
+                KillEnemy(_enemies[i]);
+            }
+            toKillThisFrame.Clear();
+            reachedEndThisFrame = 0;
+        }
+
         public void CustomUpdate(float deltaTime)
         {
-            for (int i = _enemies.Count-1; i>=0; --i)
+            for (int i = _enemies.Count - 1; i >= 0; --i)
             {
                 _enemies[i].CustomUpdate(deltaTime);
                 if (_enemies[i].ReachedEnd)

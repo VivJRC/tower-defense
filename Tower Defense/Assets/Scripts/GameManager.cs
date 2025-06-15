@@ -19,6 +19,11 @@ public class GameManager : MonoBehaviour
     [SerializeField] private DefenseManager _defenseManager;
     [SerializeField] private DefensePlacementManager _defensePlacementManager;
 
+    [Header("End")]
+    [SerializeField] private Button _replay;
+    [SerializeField] private TextMeshProUGUI _endText;
+    [SerializeField] private CanvasGroup _endScreen;
+
     [Header("Speed")]
     [SerializeField] private Button _speedBtn;
     [SerializeField] private TextMeshProUGUI _speedBtnText;
@@ -76,17 +81,36 @@ public class GameManager : MonoBehaviour
         _waveManager.Init();
         _defenseManager.Init();
         _defensePlacementManager.Init(_mapManager.GetMap());
+        
+        _speedBtn.onClick.AddListener(OnSpeedBtnClicked);
+        _pauseBtn.onClick.AddListener(OnPauseBtnClicked);
+
+        Reset();
+    }
+
+    private void Reset()
+    {
+        _gameOver = false;
+        
+        _replay.onClick.RemoveListener(Reset);
+
+        _endScreen.alpha = 0;
+        _endScreen.interactable = false;
+        _endScreen.blocksRaycasts = false;
 
         _speed = 1f;
         _speedBtnText.text = ">>";
-        _speedBtn.onClick.AddListener(OnSpeedBtnClicked);
-        _pauseBtn.onClick.AddListener(OnPauseBtnClicked);
 
         _pause = false;
         _pauseBtnText.text = "||";
 
         CurrentHealth = _startHealth;
         CurrentTokens = _startTokens;
+
+        _enemyManager.Reset();
+        _waveManager.Reset();
+        _defenseManager.Reset();
+        _defensePlacementManager.Reset();
     }
 
     private void OnDestroy()
@@ -107,6 +131,15 @@ public class GameManager : MonoBehaviour
         _pauseBtnText.text = _pause ? "|>" : "||";
     }
 
+    public void ShowEndScreen(bool won)
+    {
+        _endScreen.interactable = true;
+        _endScreen.blocksRaycasts = true;
+        _endScreen.DOFade(1f, 0.3f);
+        _replay.onClick.AddListener(Reset);
+        _endText.text = won ? "You won!" : "You lost!";
+    }
+
     private void Update()
     {
         if (_gameOver || _pause)
@@ -124,6 +157,11 @@ public class GameManager : MonoBehaviour
                 _waveManager.frameSpawn.RemoveAt(i);
             }
         }
+        if (_waveManager.LastWave && _waveManager.SpawnQueueCount == 0 && _enemyManager.Enemies.Count == 0)
+        {
+            _gameOver = true;
+            ShowEndScreen(true);
+        }
         #endregion
 
         #region ENEMY MANAGER
@@ -138,8 +176,8 @@ public class GameManager : MonoBehaviour
 
             if (CurrentHealth == 0)
             {
-                Debug.Log("Game Over!!!");
                 _gameOver = true;
+                ShowEndScreen(false);
             }
         }
         if (_enemyManager.toKillThisFrame.Count > 0)
@@ -161,16 +199,16 @@ public class GameManager : MonoBehaviour
             if (cost <= CurrentTokens)
             {
                 E_DefenseType type = _defensePlacementManager.defenseToPlace.defenseType;
-                Vector2 coord = _defensePlacementManager.defenseToPlace.cell.Coordinates;
+                Cell cell = _defensePlacementManager.defenseToPlace.cell;
                 int zone = _defensePlacementManager.defenseToPlace.zone;
                 CurrentTokens -= cost;
-                List<Cell> inZone = _mapManager.GetInZone(coord, zone);
+                List<Cell> inZone = _mapManager.GetInZone(cell.Coordinates, zone);
                 // // DEBUG
                 // for (int i = 0; i < inZone.Count; ++i)
                 // {
                 //     _mapManager.GetCellViewAtCoordinates(inZone[i].Coordinates).StartFlash();
                 // }
-                _defenseManager.AddDefense(type, coord, inZone);
+                _defenseManager.AddDefense(type, cell, inZone);
                 _defensePlacementManager.defenseToPlace.cell.AddDefense();
             }
             else
@@ -193,7 +231,7 @@ public class GameManager : MonoBehaviour
 
                 defense.Attack();
                 _enemyManager.AddDamage(target, damage);
-                
+
                 _defenseManager.defendingThisFrame.RemoveAt(i);
             }
         }
