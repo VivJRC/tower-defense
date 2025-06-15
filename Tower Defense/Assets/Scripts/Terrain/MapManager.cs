@@ -52,6 +52,11 @@ namespace MAP
             }
         }
 
+        public List<CellView> GetMap()
+        {
+            return _cellViews;
+        }
+        
         public CellView GetCellAtCoordinates(int x, int y)
         {
             return GetCellAtCoordinates(new Vector2(x, y));

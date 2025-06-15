@@ -38,7 +38,7 @@ namespace DEF
             }
         }
 
-        public void AddDefense(E_DefenseType type)
+        public void AddDefense(E_DefenseType type, Vector2 coordinates)
         {
             DefenseModel model = _defenseConfig.GetModel(type);
             if (model == null)
@@ -59,7 +59,7 @@ namespace DEF
                 view = Instantiate(viewPrefab, _viewParent);
             }
 
-            Defense defense = new(model, view);
+            Defense defense = new(model, view, coordinates);
             _defenses.Add(defense);
         }
     }

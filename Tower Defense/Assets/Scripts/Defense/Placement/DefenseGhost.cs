@@ -9,8 +9,12 @@ namespace DEF.Placement
         [SerializeField] private Transform _viewParent;
         public bool IsVisible => this.gameObject.activeSelf;
 
+        private E_DefenseType _defenseType;
+        public E_DefenseType DefenseType => _defenseType;
+
         public void Init(DefenseModel defenseModel, DefenseView viewPrefab)
         {
+            _defenseType = defenseModel.Type;
             Instantiate(viewPrefab, _viewParent);
             _zone.sizeDelta = new Vector2(defenseModel.Zone.x * 85, defenseModel.Zone.y * 85);
             HideGhost();
@@ -31,14 +35,9 @@ namespace DEF.Placement
             this.gameObject.SetActive(false);
         }
 
-        public void ShowZone()
+        public void ShowZone(bool display)
         {
-            _zone.gameObject.SetActive(true);
-        }
-
-        public void HideZone()
-        {
-            _zone.gameObject.SetActive(false);
+            _zone.gameObject.SetActive(display);
         }
     }
 }

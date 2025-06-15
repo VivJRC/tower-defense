@@ -38,7 +38,7 @@ public class GameManager : MonoBehaviour
         _enemyManager.Init(start, path);
         _waveManager.Init();
         _defenseManager.Init();
-        _defensePlacementManager.Init();
+        _defensePlacementManager.Init(_mapView.GetMap());
 
         _speed = 1f;
         _speedBtnText.text = ">>";
@@ -103,6 +103,15 @@ public class GameManager : MonoBehaviour
             }
         }
         _defensePlacementManager.CustomUpdate(deltaTime);
+        if (_defensePlacementManager.defenseToPlace != null)
+        {
+            _defenseManager.AddDefense
+            (
+                _defensePlacementManager.defenseToPlace.defenseType,
+                _defensePlacementManager.defenseToPlace.coordinates
+            );
+            _defensePlacementManager.defenseToPlace = null;
+        }
 
         _defenseManager.CustomUpdate(deltaTime);
     }

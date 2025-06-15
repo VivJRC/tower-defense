@@ -10,14 +10,18 @@ namespace MAP
         [SerializeField] private Image _image;
         private Cell _cell;
         public Cell Cell => _cell;
-        private E_CellType _cellType;
+
+        private Color _colorSave;
+        private bool _highlight;
+
+        private bool _hasDefense;
+        public bool HasDefense => _hasDefense;
 
         // DEBUG(i think)
         public void SetType(Cell cell)
         {
             _cell = cell;
-            _cellType = cell.CellType;
-            _image.color = _cellType switch
+            _image.color = cell.CellType switch
             {
                 E_CellType.DEFAULT => Color.black,
                 E_CellType.SLOT => Color.gray,
@@ -37,6 +41,31 @@ namespace MAP
         {
             Color color = _image.color;
             yield return _image.DOColor(Color.blue, 0.5f).OnComplete(() => { _image.DOColor(color, 0.5f); });
+        }
+
+        public void Hihlight(bool highlight)
+        {
+            if (!_highlight && highlight)
+            {
+                _colorSave = _image.color;
+                _highlight = true;
+                _image.color = Color.yellow;
+            }
+            if (_highlight && !highlight)
+            {
+                _image.color = _colorSave;
+                _highlight = false;
+            }
+        }
+
+        public void AddDefense()
+        {
+            _hasDefense = true;
+        }
+
+        public void RemoveDefense()
+        {
+            _hasDefense = false;
         }
     }
 }
