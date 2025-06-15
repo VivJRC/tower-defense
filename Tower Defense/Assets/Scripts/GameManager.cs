@@ -8,6 +8,7 @@ using ATK;
 using DEF;
 using WAVE;
 using DEF.Placement;
+using DG.Tweening;
 
 public class GameManager : MonoBehaviour
 {
@@ -174,7 +175,7 @@ public class GameManager : MonoBehaviour
             }
             else
             {
-                // TODO: add feedback not enough tokens
+                _tokens.DOColor(Color.red, 0.3f).OnComplete(() => { _tokens.DOColor(Color.white, 0.3f); });
             }
             _defensePlacementManager.defenseToPlace = null;
         }
