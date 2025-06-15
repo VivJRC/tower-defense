@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using NaughtyAttributes;
 using UnityEngine;
 using MAP;
+using System.Collections;
 
 namespace ATK
 {
@@ -92,8 +93,16 @@ namespace ATK
 
         public void AddDamage(Enemy enemy, float damage)
         {
+            if (enemy.CurrentHealth == 0) // already dead
+                return;
+            StartCoroutine(DelayedDamage(enemy, damage));
+        }
+        
+        private IEnumerator DelayedDamage(Enemy enemy, float damage)
+        {
+            yield return new WaitForSeconds(0.3f); // wait for the defense to hit the enemy
             enemy.AddDamage(damage);
-            if (enemy.CurrentHealth <= 0)
+            if (enemy.CurrentHealth <= 0 && !toKillThisFrame.Contains(enemy)) // can already be in toKillThisFrame if it got attacked twice within 0.3 sec
             {
                 toKillThisFrame.Add(enemy);
             }
@@ -103,13 +112,18 @@ namespace ATK
         {
             if (!_enemies.Contains(enemy))
             {
-                Debug.LogError("Trying to kill an unregistered enemy.");
+                return;
             }
             _enemies.Remove(enemy);
             _availableViews[enemy.Type].Add(enemy.View);
-            enemy.Kill();
+            StartCoroutine(DelayKill(enemy));
         }
 
+        private IEnumerator DelayKill(Enemy enemy)
+        {
+            yield return new WaitForSeconds(0.15f); // wait for the health bar to go to 0
+            enemy.Kill();
+        }
 
         #region DEBUG
         [Button]

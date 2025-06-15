@@ -18,6 +18,7 @@ namespace ATK
         public float CurrentHealth => _currentHealth;
 
         private Vector2 _currentPos;
+        public Vector2 CurrentPos => _currentPos;
         private Cell _previousTarget;
         private Cell _currentTarget;
         private Cell _currentCell;

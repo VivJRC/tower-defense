@@ -2,7 +2,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using MAP;
 using ATK;
-using Unity.VisualScripting.Antlr3.Runtime.Tree;
+using System.Collections;
 
 namespace DEF
 {
@@ -32,19 +32,21 @@ namespace DEF
         public void CustomUpdate(float deltaTime)
         {
             _attackDelay += deltaTime;
-            if (_attackDelay >= 1f && !_readyToAttack)
+            if (_attackDelay >= 0.8f && !_readyToAttack)
             {
                 _readyToAttack = true;
             }
         }
 
-        public void Attack()
+        public void Attack(Enemy enemy)
         {
             _readyToAttack = false;
             _attackDelay = 0f;
+
+            _view.Attack(enemy.CurrentPos * 85);
         }
 
-        public Enemy GetTarget()
+        private Cell GetTargetCell()
         {
             Cell cell = null;
             for (int i = _inZone.Count - 1; i >= 0; i--) // closest to the end
@@ -55,7 +57,12 @@ namespace DEF
                     break;
                 }
             }
-            return cell?.Enemies[0];
+            return cell;
+        }
+
+        public Enemy GetTarget()
+        {
+            return GetTargetCell()?.Enemies[0].CurrentHealth>0 ? GetTargetCell()?.Enemies[0] : null;
         }
 
         public float GetDamage()

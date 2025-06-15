@@ -9,6 +9,7 @@ using DEF;
 using WAVE;
 using DEF.Placement;
 using DG.Tweening;
+using System.Collections;
 
 public class GameManager : MonoBehaviour
 {
@@ -81,7 +82,7 @@ public class GameManager : MonoBehaviour
         _waveManager.Init();
         _defenseManager.Init();
         _defensePlacementManager.Init(_mapManager.GetMap());
-        
+
         _speedBtn.onClick.AddListener(OnSpeedBtnClicked);
         _pauseBtn.onClick.AddListener(OnPauseBtnClicked);
 
@@ -131,8 +132,9 @@ public class GameManager : MonoBehaviour
         _pauseBtnText.text = _pause ? "|>" : "||";
     }
 
-    public void ShowEndScreen(bool won)
+    public IEnumerator ShowEndScreen(bool won)
     {
+        yield return new WaitForSeconds(1);
         _endScreen.interactable = true;
         _endScreen.blocksRaycasts = true;
         _endScreen.DOFade(1f, 0.3f);
@@ -160,7 +162,7 @@ public class GameManager : MonoBehaviour
         if (_waveManager.LastWave && _waveManager.SpawnQueueCount == 0 && _enemyManager.Enemies.Count == 0)
         {
             _gameOver = true;
-            ShowEndScreen(true);
+            StartCoroutine(ShowEndScreen(true));
         }
         #endregion
 
@@ -177,7 +179,7 @@ public class GameManager : MonoBehaviour
             if (CurrentHealth == 0)
             {
                 _gameOver = true;
-                ShowEndScreen(false);
+                StartCoroutine(ShowEndScreen(false));
             }
         }
         if (_enemyManager.toKillThisFrame.Count > 0)
@@ -229,9 +231,8 @@ public class GameManager : MonoBehaviour
                 Enemy target = defense.GetTarget();
                 float damage = defense.GetDamage();
 
-                defense.Attack();
+                defense.Attack(target);
                 _enemyManager.AddDamage(target, damage);
-
                 _defenseManager.defendingThisFrame.RemoveAt(i);
             }
         }

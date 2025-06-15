@@ -43,6 +43,7 @@ namespace DEF.Placement
         public void Reset()
         {
             _currentGhost?.HideGhost();
+            _currentGhost = null;
             _drag = false;
         }
 
