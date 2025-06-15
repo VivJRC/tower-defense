@@ -1,25 +1,33 @@
+using System.Collections;
+using System.Collections.Generic;
+using ATK;
 using UnityEngine;
 
 namespace MAP
 {
-    [System.Serializable]
     public class Cell
     {
-        [SerializeField] private E_CellType cellType;
-        public E_CellType CellType => cellType;
+        private bool _hasDefense;
+        public bool HasDefense => _hasDefense;
+        private Enemy _enemy;
+        private CellModel _model;
 
-        [SerializeField] private Vector2 coordinates;
-        public Vector2 Coordinates => coordinates;
+        public Vector2 Coordinates => _model.Coordinates;
+        public E_CellType CellType => _model.CellType;
 
-        #if UNITY_EDITOR
-        public void SetCellType(E_CellType type)
+        public Cell(CellModel model)
         {
-            cellType = type;
+            _model = model;
         }
-        public void SetCoordinates(Vector2 coord)
+
+        public void AddDefense()
         {
-            coordinates = coord;
+            _hasDefense = true;
         }
-        #endif
+
+        public void RemoveDefense()
+        {
+            _hasDefense = false;
+        }
     }
 }

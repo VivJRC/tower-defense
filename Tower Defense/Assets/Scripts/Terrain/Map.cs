@@ -5,13 +5,13 @@ namespace MAP
 {
     public class Map : ScriptableObject
     {
-        public Cell[] cells;
+        public CellModel[] cells;
 
-        public List<Cell> GetPath()
+        public List<CellModel> GetPath()
         {
-            List<Cell> path = new();
+            List<CellModel> path = new();
 
-            foreach (Cell cell in cells)
+            foreach (CellModel cell in cells)
             {
                 if (cell.CellType == E_CellType.START)
                 {
@@ -25,7 +25,7 @@ namespace MAP
                 return null;
             }
 
-            Cell currentCell = path[0];
+            CellModel currentCell = path[0];
             bool reachedEnd = false;
             int debug = 1000;
 
@@ -33,7 +33,7 @@ namespace MAP
             {
                 int x = (int)currentCell.Coordinates.x;
                 int y = (int)currentCell.Coordinates.y;
-                foreach (Cell cell in cells)
+                foreach (CellModel cell in cells)
                 {
                     if (cell.CellType == E_CellType.END)
                     {
@@ -63,9 +63,9 @@ namespace MAP
             return path;
         }
 
-        public Cell GetStart()
+        public CellModel GetStart()
         {
-            foreach (Cell cell in cells)
+            foreach (CellModel cell in cells)
             {
                 if (cell.CellType == E_CellType.START)
                 {

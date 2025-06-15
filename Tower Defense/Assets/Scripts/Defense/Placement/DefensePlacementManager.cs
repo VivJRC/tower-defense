@@ -13,15 +13,15 @@ namespace DEF.Placement
         [SerializeField] private Transform _ghostParent;
         [SerializeField] private DefenseGhost _ghostPrefab;
 
-        private List<CellView> _map;
+        private List<Cell> _map;
         private Dictionary<E_DefenseType, DefenseGhost> _ghosts;
         private bool _drag;
         private DefenseGhost _currentGhost;
         private Vector2 _ghostPos;
-        private CellView _targetCell;
+        private Cell _targetCell;
         public DefensePlacement defenseToPlace;
 
-        public void Init(List<CellView> map)
+        public void Init(List<Cell> map)
         {
             _map = map;
             _ghosts = new Dictionary<E_DefenseType, DefenseGhost>();
@@ -64,7 +64,7 @@ namespace DEF.Placement
             {
                 if (_currentGhost != null)
                 {
-                    UpdateTargetCell(false);
+                    UpdateTargetCell();
                     _currentGhost.HideGhost();
 
                     // check if must create Defense
@@ -74,7 +74,7 @@ namespace DEF.Placement
                         {
                             defenseType = _currentGhost.DefenseType,
                             cost = _currentGhost.Cost,
-                            cellview = _targetCell
+                            cell = _targetCell
                         };
                     }
                     _currentGhost = null;
@@ -89,30 +89,25 @@ namespace DEF.Placement
             }
 
             _currentGhost.UpdatePos(_ghostPos);
-            UpdateTargetCell(true);
+            UpdateTargetCell();
             _currentGhost.ShowZone(IsCellValid(_targetCell), _targetCell);
         }
 
-        private void UpdateTargetCell(bool highlight)
+        private void UpdateTargetCell()
         {
-            CellView hovered = GetCellViewAtPos(_ghostPos);
+            Cell hovered = GetCellViewAtPos(_ghostPos);
             if (hovered != _targetCell)
             {
-                _targetCell?.Hihlight(false);
                 _targetCell = hovered;
             }
-            if (_targetCell != null)
-            {
-                _targetCell.Hihlight(true && highlight);
-            }
         }
 
-        private bool IsCellValid(CellView cellView)
+        private bool IsCellValid(Cell cell)
         {
-            return cellView != null && cellView.Cell.CellType == E_CellType.SLOT && !cellView.HasDefense;
+            return cell != null && cell.CellType == E_CellType.SLOT && !cell.HasDefense;
         }
 
-        private CellView GetCellViewAtPos(Vector2 pos)
+        private Cell GetCellViewAtPos(Vector2 pos)
         {
             RectTransformUtility.ScreenPointToLocalPointInRectangle(
                 _cellsParent,
@@ -125,7 +120,7 @@ namespace DEF.Placement
 
             for (int i = 0; i < _map.Count; ++i)
             {
-                if ((_map[i].Cell.Coordinates - cellPos).sqrMagnitude <= 0.5f)
+                if ((_map[i].Coordinates - cellPos).sqrMagnitude <= 0.5f)
                 {
                     return _map[i];
                 }
@@ -137,7 +132,7 @@ namespace DEF.Placement
         {
             public E_DefenseType defenseType;
             public int cost;
-            public CellView cellview;
+            public Cell cell;
         }
     }
 }

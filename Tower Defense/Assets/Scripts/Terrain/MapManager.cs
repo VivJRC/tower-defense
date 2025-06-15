@@ -11,6 +11,7 @@ namespace MAP
         [SerializeField] private Transform _cellParent;
         [SerializeField] private CellView _cellPrefab;
         private List<CellView> _cellViews;
+        private List<Cell> _cells;
         private Map _currentMap;
 
         public void Init()
@@ -31,9 +32,13 @@ namespace MAP
             }
 
             _cellViews ??= new List<CellView>();
+            _cells ??= new List<Cell>();
             i = 0;
-            foreach (Cell cell in map.cells)
+            foreach (CellModel cellModel in map.cells)
             {
+                Cell cell = new Cell(cellModel);
+                _cells.Add(cell);
+
                 CellView cellView;
                 if (i >= _cellViews.Count)
                 {
@@ -47,14 +52,14 @@ namespace MAP
                 cellView.gameObject.SetActive(true);
                 cellView.transform.localPosition = new Vector3(cell.Coordinates.x * 85, cell.Coordinates.y * 85, 0);
                 cellView.gameObject.name = "(" + cell.Coordinates.x + "," + cell.Coordinates.y + ")";
-                cellView.SetType(cell);
+                cellView.SetType(cellModel);
                 i++;
             }
         }
 
-        public List<CellView> GetMap()
+        public List<Cell> GetMap()
         {
-            return _cellViews;
+            return _cells;
         }
         
         public CellView GetCellAtCoordinates(int x, int y)
@@ -74,12 +79,12 @@ namespace MAP
             return null;
         }
 
-        public List<Cell> GetPath()
+        public List<CellModel> GetPath()
         {
             return _currentMap.GetPath();
         }
 
-        public Cell GetStart()
+        public CellModel GetStart()
         {
             return  _currentMap.GetStart();
         }
@@ -93,7 +98,7 @@ namespace MAP
 
         private IEnumerator DebugCoroutineGetPath()
         {
-            List<Cell> cells = GetPath();
+            List<CellModel> cells = GetPath();
             for (int i = 0; i < cells.Count; ++i)
             {
                 CellView cellView = GetCellAtCoordinates(cells[i].Coordinates);

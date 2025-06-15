@@ -13,14 +13,14 @@ namespace ATK
 
         private List<Enemy> _enemies;
         private Dictionary<E_EnemyType, List<EnemyView>> _availableViews;
-        private Cell _start;
-        private List<Cell> _path;
+        private CellModel _start;
+        private List<CellModel> _path;
 
         public List<Enemy> toKillThisFrame;
 
         [HideInInspector] public int reachedEndThisFrame;
 
-        public void Init(Cell start, List<Cell> path)
+        public void Init(CellModel start, List<CellModel> path)
         {
             _start = start;
             _path = path;

@@ -69,8 +69,8 @@ public class GameManager : MonoBehaviour
         _gameOver = false;
 
         _mapView.Init();
-        Cell start = _mapView.GetStart();
-        List<Cell> path = _mapView.GetPath();
+        CellModel start = _mapView.GetStart();
+        List<CellModel> path = _mapView.GetPath();
         _enemyManager.Init(start, path);
         _waveManager.Init();
         _defenseManager.Init();
@@ -162,9 +162,9 @@ public class GameManager : MonoBehaviour
                 _defenseManager.AddDefense
                 (
                     _defensePlacementManager.defenseToPlace.defenseType,
-                    _defensePlacementManager.defenseToPlace.cellview.Cell.Coordinates
+                    _defensePlacementManager.defenseToPlace.cell.Coordinates
                 );
-                _defensePlacementManager.defenseToPlace.cellview.AddDefense();
+                _defensePlacementManager.defenseToPlace.cell.AddDefense();
             }
             else
             {

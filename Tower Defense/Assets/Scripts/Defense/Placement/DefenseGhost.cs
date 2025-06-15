@@ -42,12 +42,12 @@ namespace DEF.Placement
             _zone.gameObject.SetActive(false);
         }
 
-        public void ShowZone(bool display, CellView cellView = null)
+        public void ShowZone(bool display, Cell cell = null)
         {
             _zone.gameObject.SetActive(display);
-            if (cellView != null)
+            if (cell != null)
             {
-                _zone.localPosition = cellView.Cell.Coordinates*85;
+                _zone.localPosition = cell.Coordinates*85;
             }
         }
     }

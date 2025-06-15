@@ -55,10 +55,10 @@ namespace MAP
             }
 
             // Set each cell's type using its individual coordinates
-            List<Cell> cells = new();
+            List<CellModel> cells = new();
             foreach (CellEditor cellEditor in currentCells)
             {
-                Cell cell = new();
+                CellModel cell = new();
                 cell.SetCellType(cellEditor.cellType);
                 cell.SetCoordinates(new Vector2(cellEditor.x + 1, cellEditor.y + 1));
                 cells.Add(cell);
@@ -77,7 +77,7 @@ namespace MAP
         private void ViewMap()
         {
             Clean();
-            foreach (Cell cell in _map.cells)
+            foreach (CellModel cell in _map.cells)
             {
                 CellEditor cellEditor = Instantiate(_cellPrefab, _cellParent);
                 cellEditor.transform.position = new Vector3(cell.Coordinates.x * 50 + 50, cell.Coordinates.y * 50 + 50, 0);

@@ -17,15 +17,15 @@ namespace ATK
         public float CurrentHealth => _currentHealth;
 
         private Vector2 _currentPos;
-        private Cell _currentCell;
-        private List<Cell> _path;
+        private CellModel _currentCell;
+        private List<CellModel> _path;
 
         private float _speed;
         private bool _reachedEnd;
         public bool ReachedEnd => _reachedEnd;
         private Vector2 _target;
 
-        public Enemy(EnemyModel model, EnemyView view, Cell start, List<Cell> path)
+        public Enemy(EnemyModel model, EnemyView view, CellModel start, List<CellModel> path)
         {
             _model = model;
             _view = view;
@@ -37,7 +37,7 @@ namespace ATK
             _view.UpdatePos(_currentPos * 85);
             _currentCell = start;
 
-            _path = new List<Cell>();
+            _path = new List<CellModel>();
             for (int i = 0; i < path.Count; ++i)
             {
                 _path.Add(path[i]); // copy path
