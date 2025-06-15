@@ -57,6 +57,20 @@ namespace MAP
             }
         }
 
+        public List<Cell> GetInZone(Vector2 coordinates, int zone)
+        {
+            List<Cell> path = GetPath();
+            List<Cell> inZone = new();
+            for (int i = 0; i < path.Count; ++i)
+            {
+                if(Mathf.Abs(path[i].Coordinates.x - coordinates.x) <= zone && Mathf.Abs(path[i].Coordinates.y - coordinates.y) <= zone)
+                {
+                    inZone.Add(path[i]);
+                }
+            }
+            return inZone;
+        }
+
         public List<Cell> GetMap()
         {
             return _cells;

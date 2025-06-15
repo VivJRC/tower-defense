@@ -156,14 +156,20 @@ public class GameManager : MonoBehaviour
             _defensePlacementManager.CustomUpdate(deltaTime);
         if (_defensePlacementManager.defenseToPlace != null)
         {
-            if (_defensePlacementManager.defenseToPlace.cost <= CurrentTokens)
+            int cost = _defensePlacementManager.defenseToPlace.cost;
+            if (cost <= CurrentTokens)
             {
-                CurrentTokens -= _defensePlacementManager.defenseToPlace.cost;
-                _defenseManager.AddDefense
-                (
-                    _defensePlacementManager.defenseToPlace.defenseType,
-                    _defensePlacementManager.defenseToPlace.cell.Coordinates
-                );
+                E_DefenseType type = _defensePlacementManager.defenseToPlace.defenseType;
+                Vector2 coord = _defensePlacementManager.defenseToPlace.cell.Coordinates;
+                int zone = _defensePlacementManager.defenseToPlace.zone;
+                CurrentTokens -= cost;
+                List<Cell> inZone = _mapManager.GetInZone(coord, zone);
+                // // DEBUG
+                // for (int i = 0; i < inZone.Count; ++i)
+                // {
+                //     _mapManager.GetCellViewAtCoordinates(inZone[i].Coordinates).StartFlash();
+                // }
+                _defenseManager.AddDefense(type, coord, inZone);
                 _defensePlacementManager.defenseToPlace.cell.AddDefense();
             }
             else

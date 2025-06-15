@@ -74,6 +74,7 @@ namespace DEF.Placement
                         {
                             defenseType = _currentGhost.DefenseType,
                             cost = _currentGhost.Cost,
+                            zone = _currentGhost.Zone,
                             cell = _targetCell
                         };
                     }
@@ -132,6 +133,7 @@ namespace DEF.Placement
         {
             public E_DefenseType defenseType;
             public int cost;
+            public int zone;
             public Cell cell;
         }
     }

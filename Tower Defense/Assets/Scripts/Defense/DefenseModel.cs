@@ -9,8 +9,8 @@ namespace DEF
         [SerializeField] private E_DefenseType _type;
         public E_DefenseType Type => _type;
 
-        [SerializeField] private Vector2 _zone;
-        public Vector2 Zone => _zone;
+        [SerializeField] private int _zone;
+        public int Zone => _zone;
 
         [SerializeField] private int _cost;
         public int Cost => _cost;

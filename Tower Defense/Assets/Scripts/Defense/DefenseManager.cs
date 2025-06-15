@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using MAP;
 using UnityEngine;
 
 namespace DEF
@@ -38,7 +39,7 @@ namespace DEF
             }
         }
 
-        public void AddDefense(E_DefenseType type, Vector2 coordinates)
+        public void AddDefense(E_DefenseType type, Vector2 coordinates, List<Cell> inZone)
         {
             DefenseModel model = _defenseConfig.GetModel(type);
             if (model == null)
@@ -59,7 +60,7 @@ namespace DEF
                 view = Instantiate(viewPrefab, _viewParent);
             }
 
-            Defense defense = new(model, view, coordinates);
+            Defense defense = new(model, view, coordinates, inZone);
             _defenses.Add(defense);
         }
     }

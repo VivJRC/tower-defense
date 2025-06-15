@@ -47,7 +47,7 @@ GameObject:
   - component: {fileID: 958617545920363485}
   - component: {fileID: 8431980434625996077}
   m_Layer: 5
-  m_Name: zone
+  m_Name: zonePreview
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -170,5 +170,5 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _rectTransform: {fileID: 6908858746087464692}
-  _zone: {fileID: 7428083167917392026}
+  _zonePreview: {fileID: 7428083167917392026}
   _viewParent: {fileID: 2099885969827000269}
