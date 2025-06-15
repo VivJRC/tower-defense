@@ -32,6 +32,7 @@ public class GameManager : MonoBehaviour
     [Header("Pause")]
     [SerializeField] private Button _pauseBtn;
     [SerializeField] private TextMeshProUGUI _pauseBtnText;
+    [SerializeField] private GameObject _pauseScreen;
 
     [Header("Health")]
     [SerializeField] private int _startHealth;
@@ -103,6 +104,7 @@ public class GameManager : MonoBehaviour
         _speedBtnText.text = ">>";
 
         _pause = false;
+        _pauseScreen.SetActive(false);
         _pauseBtnText.text = "||";
 
         CurrentHealth = _startHealth;
@@ -129,6 +131,7 @@ public class GameManager : MonoBehaviour
     private void OnPauseBtnClicked()
     {
         _pause = !_pause;
+        _pauseScreen.SetActive(_pause);
         _pauseBtnText.text = _pause ? "|>" : "||";
     }
 

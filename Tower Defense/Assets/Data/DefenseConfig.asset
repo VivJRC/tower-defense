@@ -1,0 +1,23 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe3572d387f13d0469ee3fd5489e0d9e, type: 3}
+  m_Name: DefenseConfig
+  m_EditorClassIdentifier: 
+  _datas:
+  - model: {fileID: 11400000, guid: bca97a2cdbbcb324c8f4145e907c38fb, type: 2}
+    view: {fileID: 5328065645903314442, guid: 43a6a291e3b053c46b73fb7beb4234be, type: 3}
+  - model: {fileID: 11400000, guid: 4db6393fe974d484aada0902bf1963a9, type: 2}
+    view: {fileID: 5328065645903314442, guid: 06fa6307eb94bad43870869c9a7a330c, type: 3}
+  - model: {fileID: 11400000, guid: 53e30852b75d6294c8d143d81e4165c7, type: 2}
+    view: {fileID: 5328065645903314442, guid: 5c4dea477c7118b44a96218e68c58332, type: 3}
+  - model: {fileID: 11400000, guid: 8488bc03a49c2414daffeadb793cb2fd, type: 2}
+    view: {fileID: 5328065645903314442, guid: 6f14a3a9a7d8b3748908df61b4f65417, type: 3}

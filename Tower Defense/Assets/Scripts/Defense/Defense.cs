@@ -12,7 +12,8 @@ namespace DEF
         private DefenseView _view;
         public DefenseView View => _view;
         private List<Cell> _inZone;
-        private float _attackDelay;
+        private float _attackDelay = 0.8f;
+        private float _attackTimer;
         private bool _readyToAttack;
         private Cell _cell;
         public bool ReadyToAttack => _readyToAttack;
@@ -27,12 +28,13 @@ namespace DEF
             _view.SetPosition(_cell.Coordinates * 85);
             _inZone = inZone;
             _readyToAttack = false;
+            _attackTimer = _attackDelay;
         }
 
         public void CustomUpdate(float deltaTime)
         {
-            _attackDelay += deltaTime;
-            if (_attackDelay >= 0.8f && !_readyToAttack)
+            _attackTimer += deltaTime;
+            if (_attackTimer >= _attackDelay && !_readyToAttack)
             {
                 _readyToAttack = true;
             }
@@ -41,7 +43,7 @@ namespace DEF
         public void Attack(Enemy enemy)
         {
             _readyToAttack = false;
-            _attackDelay = 0f;
+            _attackTimer = 0f;
 
             _view.Attack(enemy.CurrentPos * 85);
         }
