@@ -18,12 +18,15 @@ public class GameManager : MonoBehaviour
     [SerializeField] private DefensePlacementManager _defensePlacementManager;
     [SerializeField] private Button _speedBtn;
     [SerializeField] private TextMeshProUGUI _speedBtnText;
+    [SerializeField] private Button _pauseBtn;
+    [SerializeField] private TextMeshProUGUI _pauseBtnText;
     [SerializeField] private int _startHealth;
     private int _currentHealth;
     [SerializeField] private TextMeshProUGUI _health;
     private bool _gameOver;
 
     private float _speed;
+    private bool _pause;
 
     private void Start()
     {
@@ -40,6 +43,10 @@ public class GameManager : MonoBehaviour
         _speed = 1f;
         _speedBtnText.text = ">>";
         _speedBtn.onClick.AddListener(OnSpeedBtnClicked);
+        _pauseBtn.onClick.AddListener(OnPauseBtnClicked);
+
+        _pause = false;
+        _pauseBtnText.text = "||";
 
         _health.text = _startHealth.ToString();
         _currentHealth = _startHealth;
@@ -48,6 +55,7 @@ public class GameManager : MonoBehaviour
     private void OnDestroy()
     {
         _speedBtn.onClick.RemoveListener(OnSpeedBtnClicked);
+        _pauseBtn.onClick.RemoveListener(OnPauseBtnClicked);
     }
 
     private void OnSpeedBtnClicked()
@@ -56,12 +64,19 @@ public class GameManager : MonoBehaviour
         _speedBtnText.text = (_speed == 1f) ? ">>" : ">";
     }
 
+    private void OnPauseBtnClicked()
+    {
+        _pause = !_pause;
+        _pauseBtnText.text = _pause ? "|>" : "||";
+    }
+
     private void Update()
     {
         if (_gameOver)
             return;
 
-        float deltaTime = Time.deltaTime * _speed;
+        float deltaTime = _pause? 0f : Time.deltaTime * _speed;
+
         _waveManager.CustomUpdate(deltaTime);
         if (_waveManager.frameSpawn.Count > 0)
         {

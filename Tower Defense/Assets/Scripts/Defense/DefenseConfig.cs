@@ -19,11 +19,6 @@ namespace DEF
             return GetData(type).view;
         }
 
-        public int GetCost(E_DefenseType type)
-        {
-            return GetModel(type).Cost;
-        }
-
         public Data GetData(E_DefenseType type)
         {
             foreach (Data data in _datas)
