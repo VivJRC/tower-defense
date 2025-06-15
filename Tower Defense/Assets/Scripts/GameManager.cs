@@ -162,8 +162,9 @@ public class GameManager : MonoBehaviour
                 _defenseManager.AddDefense
                 (
                     _defensePlacementManager.defenseToPlace.defenseType,
-                    _defensePlacementManager.defenseToPlace.coordinates
+                    _defensePlacementManager.defenseToPlace.cellview.Cell.Coordinates
                 );
+                _defensePlacementManager.defenseToPlace.cellview.AddDefense();
             }
             else
             {

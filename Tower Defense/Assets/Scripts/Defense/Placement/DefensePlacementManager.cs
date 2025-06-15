@@ -74,9 +74,8 @@ namespace DEF.Placement
                         {
                             defenseType = _currentGhost.DefenseType,
                             cost = _currentGhost.Cost,
-                            coordinates = _targetCell.Cell.Coordinates
+                            cellview = _targetCell
                         };
-                        _targetCell.AddDefense();
                     }
                     _currentGhost = null;
                 }
@@ -138,7 +137,7 @@ namespace DEF.Placement
         {
             public E_DefenseType defenseType;
             public int cost;
-            public Vector2 coordinates;
+            public CellView cellview;
         }
     }
 }
