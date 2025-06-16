@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: defensePink
   m_EditorClassIdentifier: 
   _type: 4
-  _zone: 1
+  _zone: 2
   _cost: 20
   _damages:
   - enemyType: 1

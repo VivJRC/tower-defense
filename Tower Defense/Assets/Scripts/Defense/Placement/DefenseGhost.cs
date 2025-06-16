@@ -6,9 +6,9 @@ namespace DEF.Placement
     public class DefenseGhost : MonoBehaviour
     {
         [SerializeField] private RectTransform _rectTransform;
-        [SerializeField] private RectTransform _zonePreview;
         [SerializeField] private Transform _viewParent;
         public bool IsVisible => this.gameObject.activeSelf;
+        private DefenseModel _defenseModel;
 
         private E_DefenseType _defenseType;
         public E_DefenseType DefenseType => _defenseType;
@@ -19,15 +19,16 @@ namespace DEF.Placement
         private int _zone;
         public int Zone => _zone;
 
-        public void Init(DefenseModel defenseModel, DefenseView viewPrefab)
+        private RectTransform _zonePreview;
+
+        public void Init(DefenseModel defenseModel, DefenseView viewPrefab, RectTransform zonePreview)
         {
             _cost = defenseModel.Cost;
             _zone = defenseModel.Zone;
             _defenseType = defenseModel.Type;
             Instantiate(viewPrefab, _viewParent);
-            _zonePreview.SetParent(_rectTransform.parent);
-            int side = 85 + (defenseModel.Zone*2 * 85);
-            _zonePreview.sizeDelta = new Vector2(side, side);
+            _zonePreview = zonePreview;
+            _defenseModel = defenseModel;
             HideGhost();
         }
 
@@ -39,6 +40,8 @@ namespace DEF.Placement
         public void ShowGhost()
         {
             this.gameObject.SetActive(true);
+            int side = 85 + (_defenseModel.Zone*2 * 85);
+            _zonePreview.sizeDelta = new Vector2(side, side);
         }
         
         public void HideGhost()

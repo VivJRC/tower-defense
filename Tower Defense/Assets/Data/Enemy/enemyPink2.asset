@@ -14,4 +14,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _health: 35
   _type: 8
-  _drop: 2
+  _drop: 6

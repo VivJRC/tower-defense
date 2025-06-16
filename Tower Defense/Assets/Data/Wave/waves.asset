@@ -15,9 +15,17 @@ MonoBehaviour:
   _waves:
   - _waveItems:
     - enemyType: 1
-      quantity: 5
+      quantity: 9
     _delay: 5
   - _waveItems:
-    - enemyType: 3
-      quantity: 5
+    - enemyType: 1
+      quantity: 9
+    _delay: 15
+  - _waveItems:
+    - enemyType: 2
+      quantity: 7
+    _delay: 15
+  - _waveItems:
+    - enemyType: 1
+      quantity: 3
     _delay: 15

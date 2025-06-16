@@ -12,6 +12,7 @@ namespace DEF.Placement
         [SerializeField] private DefenseButton[] _defenseButtons;
         [SerializeField] private Transform _ghostParent;
         [SerializeField] private DefenseGhost _ghostPrefab;
+        [SerializeField] private RectTransform _zonePreview;
 
         private List<Cell> _map;
         private Dictionary<E_DefenseType, DefenseGhost> _ghosts;
@@ -35,7 +36,7 @@ namespace DEF.Placement
                 btn.onEndDrag = OnEndDrag;
 
                 DefenseGhost gohst = Instantiate(_ghostPrefab, _ghostParent);
-                gohst.Init(model, viewPrefab);
+                gohst.Init(model, viewPrefab, _zonePreview);
                 _ghosts.Add(btn.DefenseType, gohst);
             }
         }
