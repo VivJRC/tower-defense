@@ -26,6 +26,7 @@ namespace DEF
             _view = view;
             _view.gameObject.SetActive(true);
             _view.SetPosition(_cell.Coordinates * 85);
+            _view.InitDefense();
             _inZone = inZone;
             _readyToAttack = false;
             _attackTimer = _attackDelay;
