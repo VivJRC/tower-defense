@@ -4,9 +4,9 @@ namespace DEF
     public enum E_DefenseType
     {
         NONE = 0,
-        GREEN = 1,
-        BLUE = 2,
-        PURPLE = 3,
-        PINK = 4
+        CAT = 1,
+        FLUFF = 2,
+        LOAF = 3,
+        SPHYNX = 4
     }
 }

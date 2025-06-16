@@ -10,20 +10,20 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 3d5be1e2296bf9148a9b6aa5770c110a, type: 3}
-  m_Name: defenseBlue
+  m_Name: defenseCat
   m_EditorClassIdentifier: 
-  _type: 2
-  _zone: 2
-  _cost: 10
+  _type: 1
+  _zone: 1
+  _cost: 5
   _damages:
   - enemyType: 1
-    damage: 3
+    damage: 10
   - enemyType: 2
-    damage: 3
+    damage: 10
   - enemyType: 3
-    damage: 10
+    damage: 3
   - enemyType: 4
-    damage: 10
+    damage: 3
   - enemyType: 5
     damage: 3
   - enemyType: 6

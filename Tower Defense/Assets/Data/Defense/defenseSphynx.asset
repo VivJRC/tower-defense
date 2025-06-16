@@ -10,11 +10,11 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 3d5be1e2296bf9148a9b6aa5770c110a, type: 3}
-  m_Name: defensePurple
+  m_Name: defenseSphynx
   m_EditorClassIdentifier: 
-  _type: 3
-  _zone: 1
-  _cost: 15
+  _type: 4
+  _zone: 2
+  _cost: 20
   _damages:
   - enemyType: 1
     damage: 3
@@ -25,10 +25,10 @@ MonoBehaviour:
   - enemyType: 4
     damage: 3
   - enemyType: 5
-    damage: 10
+    damage: 3
   - enemyType: 6
-    damage: 10
+    damage: 3
   - enemyType: 7
-    damage: 3
+    damage: 10
   - enemyType: 8
-    damage: 3
+    damage: 10
