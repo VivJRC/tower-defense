@@ -1,4 +1,3 @@
-using DG.Tweening;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -7,6 +6,7 @@ namespace DEF
     public class DefenseView : MonoBehaviour
     {
         [SerializeField] private RectTransform _rectTransform;
+        [SerializeField] private RectTransform _visual;
         [SerializeField] private Button _button;
         [SerializeField] private Image _raycast;
 
@@ -20,17 +20,28 @@ namespace DEF
         public void SetPosition(Vector2 pos)
         {
             _rectTransform.localPosition = pos;
-            _basePos = pos;
+            _basePos = _visual.localPosition;
         }
 
         public void InitDefense()
         {
             _raycast.raycastTarget = true;
+            _button.onClick.AddListener(OnBtnClicked);
+        }
+
+        public void RemoveDefense()
+        {
+            _raycast.raycastTarget = false;
+            _button.onClick.RemoveListener(OnBtnClicked);
         }
 
         public void Attack(Vector2 pos, float duration)
         {
-            _attackPos = pos;
+            Vector2 parentStart = _rectTransform.localPosition;
+
+            Vector2 delta = pos - parentStart;
+
+            _attackPos = delta;
             _isAttacking = true;
             _attackTimer = 0f;
             _goingForward = true;
@@ -48,11 +59,11 @@ namespace DEF
 
             if (_goingForward)
             {
-                _rectTransform.localPosition = Vector3.Lerp(_basePos, _attackPos, t);
+                _visual.localPosition = Vector3.Lerp(_basePos, _attackPos, t);
             }
             else
             {
-                _rectTransform.localPosition = Vector3.Lerp(_attackPos, _basePos, t);
+                _visual.localPosition = Vector3.Lerp(_attackPos, _basePos, t);
             }
 
             if (t >= 1f)
@@ -67,6 +78,11 @@ namespace DEF
                     _isAttacking = false;
                 }
             }
+        }
+
+        private void OnBtnClicked()
+        {
+            
         }
     }
 }

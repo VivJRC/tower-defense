@@ -48,7 +48,7 @@ namespace DEF
             _readyToAttack = false;
             _attackTimer = 0f;
 
-            _view.Attack(enemy.CurrentPos * 85, _attackDelay);
+            _view.Attack(enemy.CurrentPos * 85, _attackDelay-0.1f);
         }
 
         private Cell GetTargetCell()
