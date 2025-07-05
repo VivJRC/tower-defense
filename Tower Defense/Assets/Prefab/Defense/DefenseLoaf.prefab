@@ -96,6 +96,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7534882781002975647, guid: 693c717fda2cbaa4daad2cb755d76e8f, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 77df8f4818739ec4cbcbd49fefe85a9b, type: 3}
     - target: {fileID: 8547392956162826669, guid: 693c717fda2cbaa4daad2cb755d76e8f, type: 3}
       propertyPath: m_Name
       value: DefenseLoaf

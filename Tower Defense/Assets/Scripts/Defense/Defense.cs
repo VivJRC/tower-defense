@@ -39,6 +39,8 @@ namespace DEF
             {
                 _readyToAttack = true;
             }
+
+            _view.CustomUpdate(deltaTime);
         }
 
         public void Attack(Enemy enemy)
@@ -46,7 +48,7 @@ namespace DEF
             _readyToAttack = false;
             _attackTimer = 0f;
 
-            _view.Attack(enemy.CurrentPos * 85);
+            _view.Attack(enemy.CurrentPos * 85, _attackDelay);
         }
 
         private Cell GetTargetCell()
