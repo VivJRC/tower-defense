@@ -48,11 +48,11 @@ namespace DEF
 
             if (_goingForward)
             {
-                _rectTransform.anchoredPosition = Vector3.Lerp(_basePos, _attackPos, t);
+                _rectTransform.localPosition = Vector3.Lerp(_basePos, _attackPos, t);
             }
             else
             {
-                _rectTransform.anchoredPosition = Vector3.Lerp(_attackPos, _basePos, t);
+                _rectTransform.localPosition = Vector3.Lerp(_attackPos, _basePos, t);
             }
 
             if (t >= 1f)
